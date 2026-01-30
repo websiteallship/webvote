@@ -1,4 +1,4 @@
-# ALLSHIP GALA DINNER - Website Bình Chọn Tiết Mục
+# ALLSHIP GALA DINNER - Website Bình Chọn Tiết Mục v1.0.0
 
 Dự án website bình chọn trực tuyến cho sự kiện ALLSHIP GALA DINNER, hỗ trợ tính năng **Ranked Choice Voting** (bình chọn theo thứ hạng) và hiển thị kết quả **Real-time Racing Bar Chart**.
 
@@ -10,11 +10,12 @@ Dự án website bình chọn trực tuyến cho sự kiện ALLSHIP GALA DINNER
     - 🥈 Hạng 2: **2 điểm**
     - 🥉 Hạng 3: **1 điểm**
 - **Kiểm Soát Gian Lận**:
-    - Ngăn chặn trùng IP trong cùng một phiên
-    - Ngăn chặn trùng tên người bình chọn
-    - Chặn thao tác khi phiên chưa mở hoặc đã kết thúc
+    - **Device Fingerprinting**: Nhận diện thiết bị duy nhất (Canvas, WebGL, Screen...) để ngăn chặn vote trùng lặp ngay cả khi đổi IP.
+    - Chặn trùng tên người bình chọn.
+    - Chặn thao tác khi phiên chưa mở hoặc đã kết thúc.
+    - Fallback cơ chế IP + User Agent nếu thiết bị chặn fingerprint.
 
-### � Màn Hình Live (Projector)
+### 📺 Màn Hình Live (Projector)
 - **Real-time Racing Bar Chart**: Biểu đồ đua cập nhật liên tục mỗi 3 giây
 - **Dynamic QR Code**: Tự động detect IP server và hiển thị QR cho khán giả quét
 - **🎉 Confetti Animation**: Hiệu ứng pháo giấy khi công bố kết quả (Nút "Celebrate!" hoặc phím 'C')
@@ -27,7 +28,11 @@ Dự án website bình chọn trực tuyến cho sự kiện ALLSHIP GALA DINNER
 
 ### 📊 Admin Panel
 - Thêm/Sửa/Xóa tiết mục (hỗ trợ upload ảnh, chọn màu đại diện)
-- Xem danh sách chi tiết từng phiếu bầu (Thời gian, Người bầu, IP, Thiết bị)
+- Xem danh sách chi tiết từng phiếu bầu:
+    - Thời gian, Người bầu, Hạng mục
+    - Địa chỉ IP
+    - Thiết bị (Mobile/Desktop)
+    - **Trình duyệt (Browser)** (Chrome, Safari, etc.)
 - **📥 Export kết quả**: Xuất CSV và PDF
 - Trang QR Code riêng (`qr.html`) để chiếu lên màn hình
 
@@ -37,7 +42,7 @@ Dự án website bình chọn trực tuyến cho sự kiện ALLSHIP GALA DINNER
     - Voter: 60s (100+ người dùng)
 - Responsive Design: Mobile (voter) + Desktop/Projector (live/admin)
 
-## �️ Cài Đặt & Chạy
+## 🏗️ Cài Đặt & Chạy
 
 ### Yêu cầu hệ thống
 - **PHP**: Phiên bản 7.4 trở lên
@@ -80,12 +85,13 @@ webvote/
 ├── login.html          # Trang đăng nhập Admin
 ├── js/
 │   ├── shared.js       # Utilities chung (time sync, countdown, toast)
+│   ├── fingerprint.js  # Device fingerprinting logic
 │   ├── vote.js         # Logic bình chọn (60s polling)
 │   ├── live.js         # Logic biểu đồ + confetti + sound (3s polling)
 │   └── admin.js        # Logic admin panel (10s polling)
 ├── api/                # Backend API (PHP)
 │   ├── performers.php  # CRUD tiết mục
-│   ├── votes.php       # Xử lý gửi phiếu, kiểm tra điều kiện
+│   ├── votes.php       # Xử lý gửi phiếu, kiểm tra vote (Fingerprint/IP)
 │   ├── results.php     # Tính toán điểm số & xếp hạng
 │   ├── session.php     # Quản lý phiên bình chọn
 │   ├── server_info.php # API lấy IP server cho QR
@@ -122,7 +128,7 @@ webvote/
 | `POST` | `/api/performers.php` | Thêm/Cập nhật tiết mục |
 | `DELETE` | `/api/performers.php?id={id}` | Xóa tiết mục |
 | `GET` | `/api/votes.php?check=1` | Kiểm tra trạng thái đã vote |
-| `POST` | `/api/votes.php` | Gửi phiếu bầu |
+| `POST` | `/api/votes.php` | Gửi phiếu bầu (kèm fingerprint) |
 | `DELETE` | `/api/votes.php` | Xóa tất cả phiếu (Admin) |
 | `GET` | `/api/results.php` | Lấy kết quả xếp hạng |
 | `POST` | `/api/session.php` | Mở/Đóng phiên (action: open/close) |
