@@ -1,0 +1,36 @@
+name: Deploy to aaPanel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            echo "🚀 Bắt đầu quá trình Deploy..."
+            
+            # 1. Di chuyển vào thư mục web
+            cd /www/wwwroot/vote-yep.allship.vn
+            
+            # 2. Loại bỏ các thay đổi tạm thời trên server (nếu có) để tránh conflict
+            git fetch origin main
+            git reset --hard origin/main
+            
+            # 3. Kéo code mới nhất từ GitHub
+            git pull origin main
+            
+            # 4. Phân lại quyền để Web Server (user www) có thể đọc ghi file
+            chown -R www:www .
+            chmod -R 755 .
+            
+            echo "✅ Deploy thành công!"
