@@ -19,6 +19,9 @@ jobs:
           script: |
             echo "🚀 Bắt đầu quá trình Deploy..."
             
+            # 0. Sửa lỗi "dubious ownership" (Do thư mục thuộc user www nhưng ssh vào bằng root)
+            git config --global --add safe.directory /www/wwwroot/vote-yep.allship.vn
+            
             # 1. Di chuyển vào thư mục web
             cd /www/wwwroot/vote-yep.allship.vn
             
