@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kết Quả Bình Chọn YEP 2025 - LIVE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Be Vietnam Pro', 'sans-serif'] },
+                    colors: {
+                        dark: '#0f172a',
+                        gold: '#fbbf24',
+                        silver: '#94a3b8',
+                        bronze: '#b45309'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .animate-up { animation: floatUp 3s ease-in-out infinite; }
+        @keyframes floatUp {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen">
+    
+    <!-- Top Bar -->
+    <div class="h-20 flex items-center justify-between px-8 bg-white/5 border-b border-white/10 backdrop-blur-md">
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                YEP AWARDS 2025
+            </h1>
+            <span class="px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-sm font-bold border border-red-500/50 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> LIVE
+            </span>
+        </div>
+        
+        <!-- Session Timer (Prominent Real-time Effect) -->
+        <div id="session-timer-container" class="hidden">
+            <div class="flex items-center gap-4 bg-gradient-to-r from-purple-600/30 to-pink-600/30 px-6 py-3 rounded-2xl border-2 border-purple-500/50 shadow-[0_0_20px_rgba(168,85,247,0.4)] animate-pulse">
+                <div class="flex flex-col items-center">
+                    <span class="text-xs text-purple-300 font-medium uppercase tracking-wider">Thời gian còn lại</span>
+                    <div class="flex items-center gap-2 mt-1">
+                        <i class="ri-timer-line text-2xl text-purple-400"></i>
+                        <span id="live-countdown" class="text-4xl font-black text-white font-mono tracking-wider drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">00:00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flex items-center gap-4 text-gray-400">
+            <i class="ri-user-smile-line"></i>
+            <span id="total-votes" class="text-white font-bold text-xl">0</span> phiếu
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex p-8 gap-8 overflow-hidden">
+        
+        <!-- Left: Leaderboard (Top 3) -->
+        <div class="w-1/3 flex flex-col gap-4">
+            <h2 class="text-xl font-bold text-gray-300 uppercase tracking-wider mb-2">Dẫn đầu</h2>
+            
+            <!-- Rank 1 Card -->
+            <div id="rank-1-card" class="flex-1 bg-gradient-to-br from-yellow-500/20 to-yellow-900/20 border border-yellow-500/30 rounded-2xl p-6 relative overflow-hidden transition-all duration-500 flex flex-col justify-center items-center text-center">
+                <div class="absolute inset-0 bg-yellow-500/5 pattern-dots pointer-events-none"></div>
+                <i class="ri-crown-fill text-5xl text-yellow-500 mb-4 animate-up"></i>
+                <div class="w-24 h-24 rounded-full border-4 border-yellow-500 p-1 mb-4 shadow-[0_0_20px_rgba(234,179,8,0.5)]">
+                    <img id="rank-1-img" src="" class="w-full h-full rounded-full object-cover">
+                </div>
+                <h3 id="rank-1-name" class="text-2xl font-bold text-white mb-1">---</h3>
+                <p id="rank-1-score" class="text-yellow-400 font-mono text-xl">0 pts</p>
+                <div class="absolute top-4 left-4 text-6xl font-black text-white/5">1</div>
+            </div>
+
+            <div class="flex gap-4 h-1/3">
+                <!-- Rank 2 -->
+                <div id="rank-2-card" class="flex-1 bg-white/5 border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center relative">
+                    <div class="absolute top-2 left-2 text-4xl font-black text-white/5">2</div>
+                    <div class="w-12 h-12 rounded-full border-2 border-gray-400 mb-2">
+                        <img id="rank-2-img" src="" class="w-full h-full rounded-full object-cover">
+                    </div>
+                    <h3 id="rank-2-name" class="text-sm font-bold text-center truncate w-full">---</h3>
+                    <p id="rank-2-score" class="text-gray-400 text-xs font-mono">0 pts</p>
+                </div>
+
+                <!-- Rank 3 -->
+                <div id="rank-3-card" class="flex-1 bg-white/5 border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center relative">
+                    <div class="absolute top-2 left-2 text-4xl font-black text-white/5">3</div>
+                    <div class="w-12 h-12 rounded-full border-2 border-orange-700 mb-2">
+                        <img id="rank-3-img" src="" class="w-full h-full rounded-full object-cover">
+                    </div>
+                    <h3 id="rank-3-name" class="text-sm font-bold text-center truncate w-full">---</h3>
+                    <p id="rank-3-score" class="text-orange-700 text-xs font-mono">0 pts</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right: Racing Chart -->
+        <div class="flex-1 bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col">
+            <h2 class="text-xl font-bold text-gray-300 uppercase tracking-wider mb-4">Chi tiết bảng xếp hạng</h2>
+            <div class="flex-1 relative w-full h-full">
+                <canvas id="racingChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR Code Overlay (Optional) -->
+    <div class="fixed bottom-8 right-8 bg-white p-2 rounded-xl">
+        <!-- Placeholder for QR Code to voting link -->
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=http://your-server-ip/webvote/" class="w-24 h-24">
+    </div>
+
+    <script src="js/live.js"></script>
+</body>
+</html>

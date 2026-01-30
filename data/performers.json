@@ -1,0 +1,30 @@
+[
+    {
+        "id": "3",
+        "name": "Đơn ca: Mùa Xuân",
+        "performer": "HR Team 2",
+        "image": "https:\/\/placehold.co\/400x300\/42d392\/ffffff?text=HR",
+        "color": "#42d392"
+    },
+    {
+        "id": 4,
+        "name": "Nhảy hiện đại",
+        "performer": "Tech Team",
+        "image": "https:\/\/placehold.co\/400x300\/647eff\/ffffff?text=Tech",
+        "color": "#647eff"
+    },
+    {
+        "id": 5,
+        "name": "Mashup YEP",
+        "performer": "Accounting",
+        "image": "https:\/\/placehold.co\/400x300\/ffd166\/ffffff?text=ACC",
+        "color": "#ffd166"
+    },
+    {
+        "name": "Tốp ca Đất nước trọn niềm vui",
+        "performer": "Marketing Team",
+        "image": "uploads\/img_697c8e281761f.png",
+        "color": "#6366f1",
+        "id": 6
+    }
+]

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bình Chọn Tiết Cục ALLSHIP YEP 2025</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Remix Icon -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Be Vietnam Pro', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#ec4899',
+                        accent: '#8b5cf6',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+        }
+        .rank-badge {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .rank-1 { background: linear-gradient(45deg, #FFD700, #FDB931); border-color: #FDB931; color: white; }
+        .rank-2 { background: linear-gradient(45deg, #E0E0E0, #BDBDBD); border-color: #BDBDBD; color: white; }
+        .rank-3 { background: linear-gradient(45deg, #CD7F32, #A0522D); border-color: #A0522D; color: white; }
+        
+        .performer-card {
+            transition: all 0.3s ease;
+        }
+        .performer-card.selected {
+            border-color: #6366f1;
+            background-color: rgba(99, 102, 241, 0.05);
+            transform: translateY(-2px);
+        }
+        .floating-shapes div {
+            position: absolute;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 50%;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="text-gray-800 relative overflow-x-hidden pb-20">
+
+    <!-- Background Shapes -->
+    <div class="floating-shapes absolute inset-0 overflow-hidden pointer-events-none">
+        <div style="top: -10%; left: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, rgba(255,255,255,0) 70%);"></div>
+        <div style="bottom: -10%; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, rgba(255,255,255,0) 70%);"></div>
+    </div>
+
+    <!-- Header -->
+    <div class="container mx-auto px-4 pt-8 pb-6 text-center">
+        <img src="images/logo.png" alt="Allship Logo" class="h-16 mx-auto mb-4">
+        <h1 class="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary mb-2">
+            Bình Chọn Tiết Mục YEP 2025
+        </h1>
+        <p class="text-gray-500 font-medium">Bình chọn tiết mục yêu thích nhất</p>
+        
+        <!-- Session Status -->
+        <div id="session-timer" class="mt-6 hidden">
+            <div class="inline-block relative">
+                <div class="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 blur-lg opacity-30 rounded-full transform scale-110"></div>
+                <div class="relative bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-2xl shadow-2xl flex items-center gap-4 border border-white/20">
+                    <div class="p-3 bg-white/20 rounded-xl backdrop-blur-sm">
+                        <i class="ri-timer-flash-line text-2xl animate-pulse"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-xs uppercase tracking-wider font-semibold text-white/80 mb-1">Thời gian còn lại</div>
+                        <div class="text-3xl font-black font-mono tracking-wide" id="countdown-timer">05:00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Session Closed Message -->
+        <div id="session-closed" class="mt-8 hidden">
+            <div class="glass-card inline-flex flex-col items-center px-10 py-8 rounded-3xl shadow-xl border-t border-white/60">
+                <div class="mb-5 relative">
+                    <div class="absolute inset-0 bg-purple-500 blur-2xl opacity-20 rounded-full"></div>
+                    <div class="w-20 h-20 bg-gradient-to-br from-white to-gray-50 rounded-2xl flex items-center justify-center shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative z-10 transform rotate-3 hover:rotate-6 transition-transform duration-300">
+                        <i class="ri-lock-2-fill text-4xl bg-clip-text text-transparent bg-gradient-to-br from-purple-500 to-pink-500"></i>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 mb-2">
+                    Cổng Bình Chọn Đang Đóng
+                </h3>
+                <p class="text-gray-500 font-medium">Vui lòng đợi hiệu lệnh mở phiên từ BTC</p>
+            </div>
+        </div>
+        
+        <!-- Session Expired Message -->
+        <div id="session-expired" class="mt-8 hidden">
+            <div class="glass-card inline-flex flex-col items-center px-10 py-8 rounded-3xl shadow-xl border-t border-white/60">
+                <div class="mb-5 relative">
+                    <div class="absolute inset-0 bg-red-500 blur-2xl opacity-20 rounded-full"></div>
+                    <div class="w-20 h-20 bg-gradient-to-br from-white to-gray-50 rounded-2xl flex items-center justify-center shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative z-10">
+                        <i class="ri-hourglass-fill text-4xl text-red-500"></i>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">
+                    Đã Hết Giờ Bình Chọn
+                </h3>
+                <p class="text-gray-500 font-medium">Cảm ơn bạn đã tham gia bình chọn!</p>
+            </div>
+        </div>
+        
+        <!-- Already Voted Message -->
+        <div id="already-voted" class="mt-8 hidden">
+            <div class="glass-card inline-flex flex-col items-center px-10 py-8 rounded-3xl shadow-xl border-t border-white/60">
+                <div class="mb-5 relative">
+                    <div class="absolute inset-0 bg-green-500 blur-2xl opacity-20 rounded-full"></div>
+                    <div class="w-20 h-20 bg-gradient-to-br from-white to-gray-50 rounded-2xl flex items-center justify-center shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative z-10">
+                        <i class="ri-checkbox-circle-fill text-4xl text-green-500"></i>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">
+                    Bạn Đã Bình Chọn!
+                </h3>
+                <p class="text-gray-500 font-medium mb-6">Cảm ơn bạn đã tham gia bình chọn trong phiên này.</p>
+                <a href="live.html" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-bold hover:opacity-90 transition-opacity shadow-lg">
+                    <i class="ri-live-line"></i> Xem Kết Quả Trực Tiếp
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 max-w-3xl">
+        
+        <!-- Ranked Choice Display -->
+        <div class="glass-card rounded-2xl p-6 mb-8 sticky top-4 z-50 shadow-lg">
+            <h2 class="text-lg font-semibold mb-4 text-center">Lựa chọn của bạn</h2>
+            <div class="grid grid-cols-3 gap-3 md:gap-6">
+                <!-- Rank 1 -->
+                <div class="text-center relative">
+                    <div id="slot-1" class="rank-slot w-full aspect-square rounded-xl border-2 border-dashed border-gray-300 flex items-center justify-center bg-white/50 relative overflow-hidden group cursor-pointer hover:border-primary/50 transition-colors">
+                        <div class="absolute top-2 left-2 w-6 h-6 rounded-full bg-yellow-400 text-white flex items-center justify-center text-xs font-bold shadow-sm z-10">1</div>
+                        <i class="ri-add-line text-2xl text-gray-400 group-hover:text-primary/50 transition-colors"></i>
+                        <img id="img-slot-1" src="" class="absolute inset-0 w-full h-full object-cover hidden">
+                        <div id="overlay-slot-1" class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hidden">
+                            <i class="ri-close-circle-fill text-white text-3xl"></i>
+                        </div>
+                    </div>
+                    <p id="name-slot-1" class="mt-2 text-sm font-medium text-gray-600 truncate">Chưa chọn</p>
+                </div>
+
+                <!-- Rank 2 -->
+                <div class="text-center relative">
+                    <div id="slot-2" class="rank-slot w-full aspect-square rounded-xl border-2 border-dashed border-gray-300 flex items-center justify-center bg-white/50 relative overflow-hidden group cursor-pointer hover:border-gray-400 transition-colors">
+                        <div class="absolute top-2 left-2 w-6 h-6 rounded-full bg-gray-400 text-white flex items-center justify-center text-xs font-bold shadow-sm z-10">2</div>
+                        <i class="ri-add-line text-2xl text-gray-400 group-hover:text-gray-500 transition-colors"></i>
+                        <img id="img-slot-2" src="" class="absolute inset-0 w-full h-full object-cover hidden">
+                        <div id="overlay-slot-2" class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hidden">
+                            <i class="ri-close-circle-fill text-white text-3xl"></i>
+                        </div>
+                    </div>
+                    <p id="name-slot-2" class="mt-2 text-sm font-medium text-gray-600 truncate">Chưa chọn</p>
+                </div>
+
+                <!-- Rank 3 -->
+                <div class="text-center relative">
+                    <div id="slot-3" class="rank-slot w-full aspect-square rounded-xl border-2 border-dashed border-gray-300 flex items-center justify-center bg-white/50 relative overflow-hidden group cursor-pointer hover:border-orange-400/50 transition-colors">
+                        <div class="absolute top-2 left-2 w-6 h-6 rounded-full bg-orange-400 text-white flex items-center justify-center text-xs font-bold shadow-sm z-10">3</div>
+                        <i class="ri-add-line text-2xl text-gray-400 group-hover:text-orange-400/50 transition-colors"></i>
+                        <img id="img-slot-3" src="" class="absolute inset-0 w-full h-full object-cover hidden">
+                        <div id="overlay-slot-3" class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hidden">
+                            <i class="ri-close-circle-fill text-white text-3xl"></i>
+                        </div>
+                    </div>
+                    <p id="name-slot-3" class="mt-2 text-sm font-medium text-gray-600 truncate">Chưa chọn</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performers List -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-24" id="performers-list">
+            <!-- Loading State -->
+            <div class="glass-card p-4 rounded-xl animate-pulse flex items-center gap-4 col-span-1 md:col-span-2">
+                <div class="w-16 h-16 bg-gray-200 rounded-lg"></div>
+                <div class="flex-1">
+                    <div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                    <div class="h-3 bg-gray-200 rounded w-1/2"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sticky Bottom Action -->
+        <div class="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-white via-white to-transparent pb-6 pt-12 z-40 pointer-events-none">
+            <div class="container mx-auto max-w-3xl pointer-events-auto">
+                <button id="submit-btn" onclick="openSubmitModal()" class="w-full bg-gradient-to-r from-primary to-secondary text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/30 transform hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                    Gửi Bình Chọn
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submit Modal -->
+    <div id="submit-modal" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="closeSubmitModal()"></div>
+        <div class="absolute bottom-0 md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 w-full md:w-[400px] bg-white md:rounded-2xl rounded-t-2xl shadow-2xl p-6 transition-transform duration-300 translate-y-full md:translate-y-0" id="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-gray-800">Xác nhận</h3>
+                <button onclick="closeSubmitModal()" class="text-gray-400 hover:text-gray-600"><i class="ri-close-line text-2xl"></i></button>
+            </div>
+            
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Tên của bạn</label>
+                <input type="text" id="voter-name" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" placeholder="Nhập tên của bạn...">
+                <p id="name-error" class="text-red-500 text-sm mt-1 hidden">Vui lòng nhập tên của bạn</p>
+            </div>
+
+            <button onclick="submitVote()" class="w-full bg-gray-900 text-white font-bold py-3.5 rounded-xl hover:bg-black transition-colors flex items-center justify-center gap-2">
+                <span>Xác nhận gửi</span>
+                <i class="ri-send-plane-fill"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 z-[70] hidden flex items-center justify-center">
+        <div class="absolute inset-0 bg-white z-0"></div>
+        <div class="relative z-10 text-center p-8 animate-bounce-in">
+            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="ri-check-line text-4xl text-green-500"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">Đã gửi bình chọn!</h2>
+            <p class="text-gray-500 mb-8">Cảm ơn bạn đã tham gia bình chọn.</p>
+            <a href="live.html" class="inline-block px-8 py-3 bg-gray-100 rounded-xl text-gray-600 font-medium hover:bg-gray-200 transition-colors">
+                Xem kết quả trực tiếp
+            </a>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="toast" class="fixed top-4 right-4 z-[80] hidden translate-x-full transition-transform duration-300 bg-white shadow-xl rounded-lg p-4 flex items-center gap-3 border-l-4 border-red-500">
+        <i class="ri-error-warning-fill text-red-500 text-xl"></i>
+        <p class="text-sm font-medium text-gray-800" id="toast-message">Thông báo</p>
+    </div>
+
+    <script src="js/vote.js"></script>
+</body>
+</html>
