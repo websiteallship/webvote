@@ -2,3 +2,5 @@
 .shared
 .agent
 data/
+key.txt
+gh_deploy_key*
