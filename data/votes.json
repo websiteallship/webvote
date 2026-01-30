@@ -1,59 +1,14 @@
 [
     {
-        "voter": "Test 1",
-        "votes": {
-            "rank1": "3",
-            "rank2": 4,
-            "rank3": 6
-        },
-        "timestamp": "2026-01-30T11:16:33.401Z"
-    },
-    {
-        "voter": "test 2",
-        "votes": {
-            "rank1": 6,
-            "rank2": 4,
-            "rank3": 5
-        },
-        "timestamp": "2026-01-30T11:38:23.373Z",
-        "ip_address": "::1",
-        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/144.0.0.0 Safari\/537.36",
-        "device": "Desktop"
-    },
-    {
-        "voter": "Test 3",
+        "voter": "Tester",
         "votes": {
             "rank1": "3",
             "rank2": 4,
             "rank3": 5
         },
-        "timestamp": "2026-01-30T11:40:59.253Z",
-        "ip_address": "localhost (127.0.0.1)",
-        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/144.0.0.0 Safari\/537.36",
-        "device": "Desktop"
-    },
-    {
-        "voter": "Test IP Fix",
-        "votes": {
-            "rank1": "3",
-            "rank2": 4,
-            "rank3": 5
-        },
-        "timestamp": "2026-01-30T11:41:19.924Z",
-        "ip_address": "localhost (127.0.0.1)",
-        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/144.0.0.0 Safari\/537.36",
-        "device": "Desktop"
-    },
-    {
-        "voter": "Test 3",
-        "votes": {
-            "rank1": "3",
-            "rank2": 4,
-            "rank3": 6
-        },
-        "timestamp": "2026-01-30T11:56:54.974Z",
-        "session_id": "2026-01-30 18:56:04",
-        "ip_raw": "::1",
+        "timestamp": "2026-01-30T18:56:06.466Z",
+        "session_id": "2026-01-31 01:54:02",
+        "ip_raw": "127.0.0.1",
         "ip_address": "localhost (127.0.0.1)",
         "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/144.0.0.0 Safari\/537.36",
         "device": "Desktop"

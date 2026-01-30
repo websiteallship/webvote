@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kết Quả Bình Chọn YEP 2025 - LIVE</title>
+    <title>Kết Quả Bình Chọn ALLSHIP GALA DINNER - LIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="icon" type="image/png" href="images/logo.png">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
-    
+
     <script>
         tailwind.config = {
             theme: {
@@ -33,57 +35,182 @@
             height: 100vh;
             overflow: hidden;
         }
-        .animate-up { animation: floatUp 3s ease-in-out infinite; }
+
+        .animate-up {
+            animation: floatUp 3s ease-in-out infinite;
+        }
+
         @keyframes floatUp {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes celebrateWinner {
+            0% {
+                transform: scale(0.9) translateY(20px);
+                opacity: 0.8;
+            }
+
+            30% {
+                transform: scale(1.15) translateY(-10px);
+            }
+
+            60% {
+                transform: scale(0.95);
+            }
+
+            100% {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .celebrate-animation {
+            animation: celebrateWinner 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        #rank-1-card.celebrate-animation {
+            box-shadow: 0 0 40px rgba(234, 179, 8, 0.8), 0 0 80px rgba(234, 179, 8, 0.4);
+        }
+
+        #rank-2-card.celebrate-animation {
+            box-shadow: 0 0 30px rgba(148, 163, 184, 0.8), 0 0 60px rgba(148, 163, 184, 0.4);
+        }
+
+        #rank-3-card.celebrate-animation {
+            box-shadow: 0 0 30px rgba(180, 83, 9, 0.8), 0 0 60px rgba(180, 83, 9, 0.4);
+        }
+
+        /* Podium Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        @keyframes bounceSlow {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .animate-bounce-slow {
+            animation: bounceSlow 3s infinite ease-in-out;
+        }
+
+        .podium-active {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
         }
     </style>
 </head>
+
 <body class="flex flex-col h-screen">
-    
+
     <!-- Top Bar -->
     <div class="h-20 flex items-center justify-between px-8 bg-white/5 border-b border-white/10 backdrop-blur-md">
         <div class="flex items-center gap-4">
             <h1 class="text-3xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-                YEP AWARDS 2025
+                ALLSHIP GALA DINNER
             </h1>
-            <span class="px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-sm font-bold border border-red-500/50 flex items-center gap-2">
+            <span
+                class="px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-sm font-bold border border-red-500/50 flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> LIVE
             </span>
         </div>
-        
+
         <!-- Session Timer (Prominent Real-time Effect) -->
         <div id="session-timer-container" class="hidden">
-            <div class="flex items-center gap-4 bg-gradient-to-r from-purple-600/30 to-pink-600/30 px-6 py-3 rounded-2xl border-2 border-purple-500/50 shadow-[0_0_20px_rgba(168,85,247,0.4)] animate-pulse">
+            <div
+                class="flex items-center gap-4 bg-gradient-to-r from-purple-600/30 to-pink-600/30 px-6 py-3 rounded-2xl border-2 border-purple-500/50 shadow-[0_0_20px_rgba(168,85,247,0.4)] animate-pulse">
                 <div class="flex flex-col items-center">
                     <span class="text-xs text-purple-300 font-medium uppercase tracking-wider">Thời gian còn lại</span>
                     <div class="flex items-center gap-2 mt-1">
                         <i class="ri-timer-line text-2xl text-purple-400"></i>
-                        <span id="live-countdown" class="text-4xl font-black text-white font-mono tracking-wider drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">00:00</span>
+                        <span id="live-countdown"
+                            class="text-4xl font-black text-white font-mono tracking-wider drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">00:00</span>
                     </div>
                 </div>
             </div>
         </div>
-        
+
+
         <div class="flex items-center gap-4 text-gray-400">
             <i class="ri-user-smile-line"></i>
             <span id="total-votes" class="text-white font-bold text-xl">0</span> phiếu
+        </div>
+
+        <!-- Celebrate Button (Admin Only, Session Ended) -->
+        <button id="celebrate-btn" onclick="celebrateWinners()"
+            class="hidden px-4 py-2 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 rounded-xl transition-all flex items-center gap-2 shadow-lg">
+            <i class="ri-trophy-line text-white"></i>
+            <span class="font-bold text-white">Celebrate!</span>
+        </button>
+    </div>
+
+    <!-- Sound Control Button -->
+    <button id="sound-toggle"
+        class="fixed top-24 right-4 z-50 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full p-3 transition-all shadow-lg"
+        onclick="toggleSound()">
+        <i id="sound-icon" class="ri-volume-up-line text-2xl text-white"></i>
+    </button>
+
+    <!-- Sound Activation Overlay -->
+    <div id="sound-activation-overlay"
+        class="fixed inset-0 bg-black/80 z-[100] flex items-center justify-center hidden">
+        <div
+            class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-8 text-center max-w-md border border-white/10 shadow-2xl">
+            <i class="ri-volume-up-line text-6xl text-purple-500 mb-4"></i>
+            <h2 class="text-2xl font-bold mb-2 text-white">Bật âm thanh?</h2>
+            <p class="text-gray-400 mb-6">Nhận thông báo âm thanh khi có phiếu bầu mới và cảnh báo khi sắp hết giờ</p>
+            <div class="flex gap-3">
+                <button onclick="enableSound()"
+                    class="flex-1 bg-purple-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-purple-700 transition-colors">
+                    <i class="ri-volume-up-line mr-2"></i>Bật âm thanh
+                </button>
+                <button onclick="disableSound()"
+                    class="flex-1 bg-gray-700 text-gray-300 px-6 py-3 rounded-lg font-bold hover:bg-gray-600 transition-colors">
+                    Không
+                </button>
+            </div>
         </div>
     </div>
 
     <!-- Main Content -->
     <div class="flex-1 flex p-8 gap-8 overflow-hidden">
-        
+
         <!-- Left: Leaderboard (Top 3) -->
         <div class="w-1/3 flex flex-col gap-4">
             <h2 class="text-xl font-bold text-gray-300 uppercase tracking-wider mb-2">Dẫn đầu</h2>
-            
+
             <!-- Rank 1 Card -->
-            <div id="rank-1-card" class="flex-1 bg-gradient-to-br from-yellow-500/20 to-yellow-900/20 border border-yellow-500/30 rounded-2xl p-6 relative overflow-hidden transition-all duration-500 flex flex-col justify-center items-center text-center">
+            <div id="rank-1-card"
+                class="flex-1 bg-gradient-to-br from-yellow-500/20 to-yellow-900/20 border border-yellow-500/30 rounded-2xl p-6 relative overflow-hidden transition-all duration-500 flex flex-col justify-center items-center text-center">
                 <div class="absolute inset-0 bg-yellow-500/5 pattern-dots pointer-events-none"></div>
                 <i class="ri-crown-fill text-5xl text-yellow-500 mb-4 animate-up"></i>
-                <div class="w-24 h-24 rounded-full border-4 border-yellow-500 p-1 mb-4 shadow-[0_0_20px_rgba(234,179,8,0.5)]">
+                <div
+                    class="w-24 h-24 rounded-full border-4 border-yellow-500 p-1 mb-4 shadow-[0_0_20px_rgba(234,179,8,0.5)]">
                     <img id="rank-1-img" src="" class="w-full h-full rounded-full object-cover">
                 </div>
                 <h3 id="rank-1-name" class="text-2xl font-bold text-white mb-1">---</h3>
@@ -93,7 +220,8 @@
 
             <div class="flex gap-4 h-1/3">
                 <!-- Rank 2 -->
-                <div id="rank-2-card" class="flex-1 bg-white/5 border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center relative">
+                <div id="rank-2-card"
+                    class="flex-1 bg-white/5 border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center relative">
                     <div class="absolute top-2 left-2 text-4xl font-black text-white/5">2</div>
                     <div class="w-12 h-12 rounded-full border-2 border-gray-400 mb-2">
                         <img id="rank-2-img" src="" class="w-full h-full rounded-full object-cover">
@@ -103,7 +231,8 @@
                 </div>
 
                 <!-- Rank 3 -->
-                <div id="rank-3-card" class="flex-1 bg-white/5 border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center relative">
+                <div id="rank-3-card"
+                    class="flex-1 bg-white/5 border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center relative">
                     <div class="absolute top-2 left-2 text-4xl font-black text-white/5">3</div>
                     <div class="w-12 h-12 rounded-full border-2 border-orange-700 mb-2">
                         <img id="rank-3-img" src="" class="w-full h-full rounded-full object-cover">
@@ -124,12 +253,99 @@
         </div>
     </div>
 
-    <!-- QR Code Overlay (Optional) -->
-    <div class="fixed bottom-8 right-8 bg-white p-2 rounded-xl">
-        <!-- Placeholder for QR Code to voting link -->
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=http://your-server-ip/webvote/" class="w-24 h-24">
+
+    <!-- QR Code Overlay -->
+    <div class="fixed bottom-8 right-8 bg-white p-3 rounded-xl shadow-lg max-w-[150px] transition-all hover:scale-110">
+        <img id="qr-code" src="" alt="QR Code" class="w-24 h-24 mx-auto">
+        <p class="text-xs text-center text-gray-600 mt-2">Quét để bình chọn</p>
+        <p id="voting-url-display" class="text-[10px] text-center text-gray-400 mt-1 break-all"></p>
     </div>
 
+    <!-- Victory Podium Modal -->
+    <div id="victory-modal"
+        class="fixed inset-0 z-[100] bg-black/90 hidden flex flex-col items-center justify-center animate-fade-in">
+        <!-- Close/Stop Button -->
+        <button onclick="stopCelebration()"
+            class="absolute top-8 right-8 px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold text-xl shadow-lg transition-all z-[110] flex items-center gap-2">
+            <i class="ri-stop-circle-line"></i> DỪNG ĂN MỪNG
+        </button>
+
+
+
+        <!-- Podium Container -->
+        <div class="flex items-end justify-center gap-4 md:gap-8 w-full max-w-6xl px-4 h-[550px]">
+
+            <!-- Rank 2 (Left) -->
+            <div id="podium-rank-2"
+                class="w-1/3 max-w-[300px] flex flex-col justify-end items-center opacity-0 translate-y-20 transition-all duration-1000 delay-300">
+                <div class="mb-4 text-center">
+                    <div
+                        class="w-32 h-32 rounded-full border-4 border-gray-300 p-1 mb-2 shadow-[0_0_20px_rgba(209,213,219,0.5)] mx-auto relative group">
+                        <img id="podium-img-2" src="" class="w-full h-full rounded-full object-cover">
+                        <div
+                            class="absolute -top-3 -right-3 w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center text-gray-800 font-black border-2 border-white">
+                            2</div>
+                    </div>
+                    <h3 id="podium-name-2" class="text-2xl font-bold text-gray-200 truncate max-w-[250px]">---</h3>
+                    <p id="podium-score-2" class="text-gray-400 font-mono text-xl">0 pts</p>
+                </div>
+                <div
+                    class="w-full h-[220px] bg-gradient-to-t from-gray-900 to-gray-700 rounded-t-lg border-t-4 border-gray-400 flex items-start justify-center pt-8 relative overflow-hidden">
+                    <div class="text-8xl font-black text-white/10">2</div>
+                    <div class="absolute inset-0 bg-white/5 pattern-diagonal pointer-events-none"></div>
+                </div>
+            </div>
+
+            <!-- Rank 1 (Center - Tallest) -->
+            <div id="podium-rank-1"
+                class="w-1/3 max-w-[320px] flex flex-col justify-end items-center opacity-0 translate-y-20 transition-all duration-1000 z-10 box-decoration-clone">
+                <div class="mb-6 text-center">
+                    <i
+                        class="ri-crown-fill text-6xl text-yellow-400 mb-2 animate-bounce-slow inline-block drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]"></i>
+                    <div
+                        class="w-40 h-40 rounded-full border-4 border-yellow-400 p-1 mb-2 shadow-[0_0_30px_rgba(250,204,21,0.6)] mx-auto relative">
+                        <img id="podium-img-1" src="" class="w-full h-full rounded-full object-cover">
+                        <div
+                            class="absolute -top-4 -right-4 w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center text-yellow-900 font-black border-2 border-white text-xl">
+                            1</div>
+                    </div>
+                    <h3 id="podium-name-1" class="text-3xl font-black text-yellow-200 truncate max-w-[300px]">---</h3>
+                    <p id="podium-score-1" class="text-yellow-400 font-mono text-2xl font-bold">0 pts</p>
+                </div>
+                <div
+                    class="w-full h-[320px] bg-gradient-to-t from-yellow-900 to-yellow-600 rounded-t-lg border-t-4 border-yellow-400 flex items-start justify-center pt-8 relative overflow-hidden shadow-[0_0_50px_rgba(234,179,8,0.3)]">
+                    <div class="text-9xl font-black text-white/20">1</div>
+                    <div class="absolute inset-0 bg-yellow-300/10 pattern-dots pointer-events-none"></div>
+                </div>
+            </div>
+
+            <!-- Rank 3 (Right) -->
+            <div id="podium-rank-3"
+                class="w-1/3 max-w-[300px] flex flex-col justify-end items-center opacity-0 translate-y-20 transition-all duration-1000 delay-600">
+                <div class="mb-4 text-center">
+                    <div
+                        class="w-32 h-32 rounded-full border-4 border-orange-700 p-1 mb-2 shadow-[0_0_20px_rgba(194,65,12,0.5)] mx-auto relative">
+                        <img id="podium-img-3" src="" class="w-full h-full rounded-full object-cover">
+                        <div
+                            class="absolute -top-3 -right-3 w-10 h-10 bg-orange-700 rounded-full flex items-center justify-center text-orange-100 font-black border-2 border-white">
+                            3</div>
+                    </div>
+                    <h3 id="podium-name-3" class="text-2xl font-bold text-orange-200 truncate max-w-[250px]">---</h3>
+                    <p id="podium-score-3" class="text-orange-700 font-mono text-xl">0 pts</p>
+                </div>
+                <div
+                    class="w-full h-[160px] bg-gradient-to-t from-orange-950 to-orange-800 rounded-t-lg border-t-4 border-orange-700 flex items-start justify-center pt-8 relative overflow-hidden">
+                    <div class="text-8xl font-black text-white/10">3</div>
+                    <div class="absolute inset-0 bg-white/5 pattern-diagonal pointer-events-none"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script src="js/shared.js"></script>
     <script src="js/live.js"></script>
 </body>
+
 </html>

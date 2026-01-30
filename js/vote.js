@@ -1,4 +1,12 @@
+/**
+ * Vote Page JavaScript for ALLSHIP GALA DINNER Voting System
+ * Uses shared.js for common utilities
+ */
+
 document.addEventListener('DOMContentLoaded', async () => {
+    // Initialize shared utilities (syncs server time)
+    await initShared();
+
     // Check if already voted first
     const hasVoted = await checkVotedStatus();
     if (!hasVoted) {
@@ -6,16 +14,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         setupModalEvents();
     }
     loadSession();
-    // Check session every 5 seconds
-    setInterval(loadSession, 5000);
+    // Check session every 60 seconds (reduced for server performance)
+    // Voters don't need real-time updates - they just need to know if voting is open
+    setInterval(loadSession, 60000);
 });
+
 
 // Check if already voted in current session
 async function checkVotedStatus() {
     try {
         const res = await fetch('api/votes.php?check=1');
         const data = await res.json();
-        
+
         if (data.voted && data.session_active) {
             showAlreadyVotedUI();
             return true;
@@ -33,10 +43,10 @@ function showAlreadyVotedUI() {
     document.getElementById('session-timer')?.classList.add('hidden');
     document.getElementById('session-closed')?.classList.add('hidden');
     document.getElementById('session-expired')?.classList.add('hidden');
-    
+
     // Show already voted message
     document.getElementById('already-voted')?.classList.remove('hidden');
-    
+
     // Hide voting area
     const mainContent = document.querySelector('.container.mx-auto.px-4.max-w-3xl');
     if (mainContent) mainContent.classList.add('hidden');
@@ -74,19 +84,47 @@ function renderPerformers() {
         card.className = `performer-card glass-card p-4 rounded-xl flex items-center gap-4 cursor-pointer border border-transparent hover:border-gray-200 ${isSelected ? 'selected ring-1 ring-primary/20' : ''}`;
         card.onclick = () => toggleSelection(p.id);
 
-        card.innerHTML = `
-            <div class="relative w-16 h-16 flex-shrink-0">
-                <img src="${p.image}" class="w-full h-full object-cover rounded-lg shadow-sm" alt="${p.name}">
-                ${rank ? `<div class="absolute -top-2 -right-2 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white shadow-sm rank-${rank}">${rank}</div>` : ''}
-            </div>
-            <div class="flex-1 min-w-0">
-                <h3 class="text-lg font-bold text-gray-800 truncate">${p.name}</h3>
-                <p class="text-sm text-gray-500 truncate">${p.performer}</p>
-            </div>
-            <div class="w-8 h-8 rounded-full border-2 border-gray-200 flex items-center justify-center transition-colors ${isSelected ? 'bg-primary border-primary text-white' : 'text-transparent'}">
-                <i class="ri-check-line"></i>
-            </div>
-        `;
+        // Image container
+        const imgContainer = document.createElement('div');
+        imgContainer.className = 'relative w-16 h-16 flex-shrink-0';
+
+        const img = document.createElement('img');
+        img.src = p.image; // Already sanitized on server
+        img.className = 'w-full h-full object-cover rounded-lg shadow-sm';
+        img.alt = p.name;
+        imgContainer.appendChild(img);
+
+        if (rank) {
+            const rankBadge = document.createElement('div');
+            rankBadge.className = `absolute -top-2 -right-2 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white shadow-sm rank-${rank}`;
+            rankBadge.textContent = rank;
+            imgContainer.appendChild(rankBadge);
+        }
+
+        card.appendChild(imgContainer);
+
+        // Text container
+        const textContainer = document.createElement('div');
+        textContainer.className = 'flex-1 min-w-0';
+
+        const nameEl = document.createElement('h3');
+        nameEl.className = 'text-lg font-bold text-gray-800 line-clamp-2';
+        nameEl.textContent = p.name; // XSS protected
+        textContainer.appendChild(nameEl);
+
+        const performerEl = document.createElement('p');
+        performerEl.className = 'text-sm text-gray-500 line-clamp-1';
+        performerEl.textContent = p.performer; // XSS protected
+        textContainer.appendChild(performerEl);
+
+        card.appendChild(textContainer);
+
+        // Checkbox
+        const checkbox = document.createElement('div');
+        checkbox.className = `w-8 h-8 rounded-full border-2 border-gray-200 flex items-center justify-center transition-colors ${isSelected ? 'bg-primary border-primary text-white' : 'text-transparent'}`;
+        checkbox.innerHTML = '<i class="ri-check-line"></i>';
+        card.appendChild(checkbox);
+
         container.appendChild(card);
     });
 }
@@ -131,22 +169,22 @@ function updateSlotUI(rank, performer) {
     const imgEl = document.getElementById(`img-slot-${rank}`);
     const iconEl = slot.querySelector('i.ri-add-line');
     const overlayEl = document.getElementById(`overlay-slot-${rank}`); // Close overlay
-    
+
     if (performer) {
         // Filled state
         slot.classList.add('border-primary'); // Highlight border
         slot.classList.remove('border-dashed', 'border-gray-300');
         slot.classList.add('border-solid');
-        
+
         nameEl.textContent = performer.name;
         nameEl.classList.add('text-primary', 'font-bold');
-        
+
         imgEl.src = performer.image;
         imgEl.classList.remove('hidden');
-        
+
         iconEl.classList.add('hidden');
         overlayEl.classList.remove('hidden');
-        
+
         // Remove click handler from slot to avoid re-triggering selection if we handled it via list
         // create a remove handler
         overlayEl.onclick = (e) => {
@@ -161,13 +199,13 @@ function updateSlotUI(rank, performer) {
         // Empty state
         slot.classList.remove('border-primary', 'border-solid');
         slot.classList.add('border-dashed', 'border-gray-300');
-        
+
         nameEl.textContent = 'Chưa chọn';
         nameEl.classList.remove('text-primary', 'font-bold');
-        
+
         imgEl.src = '';
         imgEl.classList.add('hidden');
-        
+
         iconEl.classList.remove('hidden');
         overlayEl.classList.add('hidden');
     }
@@ -179,7 +217,7 @@ function checkSubmitButton() {
     const isFull = votes[1] && votes[2] && votes[3];
     const btn = document.getElementById('submit-btn');
     btn.disabled = !isFull;
-    if(isFull) {
+    if (isFull) {
         btn.classList.remove('opacity-50', 'cursor-not-allowed');
     } else {
         btn.classList.add('opacity-50', 'cursor-not-allowed');
@@ -210,7 +248,7 @@ function setupModalEvents() {
 async function submitVote() {
     const nameInput = document.getElementById('voter-name');
     const name = nameInput.value.trim();
-    
+
     if (!name) {
         document.getElementById('name-error').classList.remove('hidden');
         nameInput.focus();
@@ -233,9 +271,9 @@ async function submitVote() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
         });
-        
+
         const result = await res.json();
-        
+
         if (result.success) {
             closeSubmitModal();
             document.getElementById('success-modal').classList.remove('hidden');
@@ -252,21 +290,21 @@ async function submitVote() {
 function showToast(msg) {
     const toast = document.getElementById('toast');
     document.getElementById('toast-message').textContent = msg;
-    
+
     // Show toast
     toast.classList.remove('hidden');
-    
+
     // Slide in animation
     setTimeout(() => {
         toast.classList.add('translate-x-0');
         toast.classList.remove('translate-x-full');
     }, 10);
-    
+
     // Hide after 3 seconds
     setTimeout(() => {
         toast.classList.remove('translate-x-0');
         toast.classList.add('translate-x-full');
-        
+
         // Remove from DOM after animation
         setTimeout(() => {
             toast.classList.add('hidden');
@@ -274,8 +312,6 @@ function showToast(msg) {
     }, 3000);
 }
 
-// Session Management
-let sessionCountdownInterval = null;
 
 async function loadSession() {
     try {
@@ -299,66 +335,83 @@ function updateSessionUI(session) {
     closedEl.classList.add('hidden');
     expiredEl.classList.add('hidden');
 
+    // Smart Modal Logic: ONLY based on vote_count (ignore status for modal selection)
+    const hasVotes = session.vote_count && session.vote_count > 0;
+
     if (session.status === 'open') {
         // Show countdown timer
         timerEl.classList.remove('hidden');
-        
+
         // Enable voting
         submitBtn.disabled = false;
         performerCards.forEach(card => {
             card.style.pointerEvents = 'auto';
             card.style.opacity = '1';
         });
-        
+
         // Start countdown
         if (sessionCountdownInterval) clearInterval(sessionCountdownInterval);
         sessionCountdownInterval = setInterval(() => updateSessionCountdown(session.end_time), 1000);
         updateSessionCountdown(session.end_time);
-    } else if (session.status === 'expired') {
-        // Show expired message
-        expiredEl.classList.remove('hidden');
-        
+    } else {
+        // Session NOT open → Show modal based on vote_count ONLY
+        if (hasVotes) {
+            // Has votes → "Đã Hết Giờ Bình Chọn"
+            expiredEl.classList.remove('hidden');
+        } else {
+            // No votes → "Cổng Bình Chọn Đang Đóng"
+            closedEl.classList.remove('hidden');
+        }
+
         // Disable voting
         submitBtn.disabled = true;
         performerCards.forEach(card => {
             card.style.pointerEvents = 'none';
             card.style.opacity = '0.6';
         });
-        
-        if (sessionCountdownInterval) clearInterval(sessionCountdownInterval);
-    } else {
-        // Show closed message
-        closedEl.classList.remove('hidden');
-        
-        // Disable voting but allow viewing
-        submitBtn.disabled = true;
-        performerCards.forEach(card => {
-            card.style.pointerEvents = 'none';
-            card.style.opacity = '0.6';
-        });
-        
+
         if (sessionCountdownInterval) clearInterval(sessionCountdownInterval);
     }
 }
 
 function updateSessionCountdown(endTime) {
-    const now = new Date().getTime();
-    // Parse the datetime string correctly (PHP format: Y-m-d H:i:s)
-    // Replace space with T to make it ISO-like, then parse as local time
-    const endTimeStr = endTime.replace(' ', 'T');
-    const end = new Date(endTimeStr).getTime();
-    const remaining = Math.max(0, end - now);
+    // Use shared function with server time offset
+    updateCountdown(endTime, 'countdown-timer', loadSession);
+}
 
-    const minutes = Math.floor(remaining / 60000);
-    const seconds = Math.floor((remaining % 60000) / 1000);
+// ============================================
+// GUIDE MODAL
+// ============================================
 
-    const display = document.getElementById('countdown-timer');
-    if (display) {
-        display.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-    }
+function openGuideModal() {
+    const modal = document.getElementById('guide-modal');
+    const content = document.getElementById('guide-modal-content');
 
-    if (remaining <= 0) {
-        clearInterval(sessionCountdownInterval);
-        loadSession(); // Reload to show expired state
-    }
+    modal.classList.remove('hidden');
+
+    // Smooth fade and scale animation
+    setTimeout(() => {
+        modal.style.opacity = '1';
+        content.style.transform = 'scale(1)';
+        content.style.opacity = '1';
+    }, 10);
+
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+}
+
+function closeGuideModal() {
+    const modal = document.getElementById('guide-modal');
+    const content = document.getElementById('guide-modal-content');
+
+    // Fade out animation
+    modal.style.opacity = '0';
+    content.style.transform = 'scale(0.95)';
+    content.style.opacity = '0';
+
+    setTimeout(() => {
+        modal.classList.add('hidden');
+        // Restore body scroll
+        document.body.style.overflow = '';
+    }, 300);
 }

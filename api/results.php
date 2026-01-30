@@ -14,7 +14,7 @@ $session = json_decode(file_get_contents($sessionFile), true) ?: [];
 $currentSessionId = $session['start_time'] ?? null;
 
 // Filter votes for current session only
-$votes = array_filter($allVotes, function($v) use ($currentSessionId) {
+$votes = array_filter($allVotes, function ($v) use ($currentSessionId) {
     return ($v['session_id'] ?? '') === $currentSessionId;
 });
 
@@ -38,14 +38,17 @@ foreach ($votes as $v) {
     $rank1 = strval($v['votes']['rank1'] ?? '');
     $rank2 = strval($v['votes']['rank2'] ?? '');
     $rank3 = strval($v['votes']['rank3'] ?? '');
-    
-    if (isset($scores[$rank1])) $scores[$rank1]['score'] += 3;
-    if (isset($scores[$rank2])) $scores[$rank2]['score'] += 2;
-    if (isset($scores[$rank3])) $scores[$rank3]['score'] += 1;
+
+    if (isset($scores[$rank1]))
+        $scores[$rank1]['score'] += 3;
+    if (isset($scores[$rank2]))
+        $scores[$rank2]['score'] += 2;
+    if (isset($scores[$rank3]))
+        $scores[$rank3]['score'] += 1;
 }
 
 // Sort by score desc
-usort($scores, function($a, $b) {
+usort($scores, function ($a, $b) {
     return $b['score'] <=> $a['score'];
 });
 

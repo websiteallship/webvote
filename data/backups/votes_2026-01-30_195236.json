@@ -1,0 +1,16 @@
+[
+    {
+        "voter": "Jetski Test",
+        "votes": {
+            "rank1": 3,
+            "rank2": 4,
+            "rank3": 5
+        },
+        "timestamp": "2026-01-30T18:48:40.436Z",
+        "session_id": "2026-01-31 01:47:24",
+        "ip_raw": "127.0.0.1",
+        "ip_address": "localhost (127.0.0.1)",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/144.0.0.0 Safari\/537.36",
+        "device": "Desktop"
+    }
+]

@@ -1,129 +1,149 @@
-# YEP 2025 - Website Bình Chọn Tiết Mục
+# ALLSHIP GALA DINNER - Website Bình Chọn Tiết Mục
 
-Dự án website bình chọn trực tuyến cho sự kiện YEP 2025, hỗ trợ tính năng **Ranked Choice Voting** (bình chọn theo thứ hạng) và hiển thị kết quả **Real-time Racing Bar Chart**.
+Dự án website bình chọn trực tuyến cho sự kiện ALLSHIP GALA DINNER, hỗ trợ tính năng **Ranked Choice Voting** (bình chọn theo thứ hạng) và hiển thị kết quả **Real-time Racing Bar Chart**.
 
 ## ✨ Tính Năng Nổi Bật
 
-- 🗳️ **Ranked Choice Voting**: Người dùng chọn 3 tiết mục yêu thích nhất theo thứ tự:
+### 🗳️ Bình Chọn
+- **Ranked Choice Voting**: Người dùng chọn 3 tiết mục yêu thích nhất theo thứ tự:
     - 🥇 Hạng 1: **3 điểm**
     - 🥈 Hạng 2: **2 điểm**
     - 🥉 Hạng 3: **1 điểm**
-- 📊 **Real-time Live Chart**: Biểu đồ đua (Racing Bar Chart) cập nhật liên tục mỗi 3 giây, tạo hiệu ứng kịch tính.
-- ⏱️ **Quản Lý Phiên Bình Chọn**: Admin có thể mở/đóng phiên bình chọn và thiết lập thời gian đếm ngược (3, 5, 10... phút).
-- 🛡️ **Kiểm Soát Gian Lận**:
-    - Ngăn chặn trùng IP trong cùng một phiên.
-    - Ngăn chặn trùng tên người bình chọn trong cùng một phiên.
-    - Chặn thao tác bình chọn khi phiên chưa mở hoặc đã kết thúc.
-- 📱 **Responsive Design**: Giao diện tối ưu hoàn hảo cho cả Mobile (người bình chọn) và Desktop/Projector (màn hình LED sự kiện).
-- ⚙️ **Admin Panel Mạnh Mẽ**:
-    - Thêm/Sửa/Xóa tiết mục (hỗ trợ upload ảnh, chọn màu đại diện).
-    - Xem danh sách chi tiết từng phiếu bầu (Thời gian, Người bầu, IP, Thiết bị).
-    - Xóa toàn bộ dữ liệu để reset hệ thống.
+- **Kiểm Soát Gian Lận**:
+    - Ngăn chặn trùng IP trong cùng một phiên
+    - Ngăn chặn trùng tên người bình chọn
+    - Chặn thao tác khi phiên chưa mở hoặc đã kết thúc
 
-## 🚀 Cài Đặt & Chạy (Local)
+### � Màn Hình Live (Projector)
+- **Real-time Racing Bar Chart**: Biểu đồ đua cập nhật liên tục mỗi 3 giây
+- **Dynamic QR Code**: Tự động detect IP server và hiển thị QR cho khán giả quét
+- **🎉 Confetti Animation**: Hiệu ứng pháo giấy khi công bố kết quả (Nút "Celebrate!" hoặc phím 'C')
+- **🔊 Sound Effects**: Âm thanh khi có vote mới, countdown warning (10 giây, hết giờ)
+
+### ⏱️ Quản Lý Phiên
+- Mở/đóng phiên bình chọn với thời gian tùy chọn (3, 5, 10, 15, 30 phút)
+- Đồng bộ hóa đồng hồ giữa server và client
+- Đếm ngược realtime trên cả trang Vote và Live
+
+### 📊 Admin Panel
+- Thêm/Sửa/Xóa tiết mục (hỗ trợ upload ảnh, chọn màu đại diện)
+- Xem danh sách chi tiết từng phiếu bầu (Thời gian, Người bầu, IP, Thiết bị)
+- **📥 Export kết quả**: Xuất CSV và PDF
+- Trang QR Code riêng (`qr.html`) để chiếu lên màn hình
+
+### 🚀 Hiệu Năng
+- **Traffic Separation**: Tối ưu polling cho server yếu (1 vCPU, 1GB RAM)
+    - Admin/Live: 3-10s (1-2 máy BTC)
+    - Voter: 60s (100+ người dùng)
+- Responsive Design: Mobile (voter) + Desktop/Projector (live/admin)
+
+## �️ Cài Đặt & Chạy
 
 ### Yêu cầu hệ thống
-- **PHP**: Phiên bản 7.4 trở lên.
-- **Web Server**: Apache/Nginx hoặc PHP built-in server.
-- **Quyền ghi**: Thư mục `data/` và `uploads/` cần có quyền ghi (777 hoặc quyền user web).
+- **PHP**: Phiên bản 7.4 trở lên
+- **Web Server**: Apache/Nginx hoặc PHP built-in server
+- **Quyền ghi**: Thư mục `data/` và `uploads/`
 
 ### Hướng dẫn chạy nhanh
-1. Di chuyển vào thư mục dự án:
-   ```bash
-   cd webvote
-   ```
-2. Khởi động PHP Server:
-   ```bash
-   php -S 0.0.0.0:8000
-   ```
-3. Truy cập:
-   - **Trang bình chọn (Voter)**: `http://localhost:8000` (hoặc IP LAN của máy chủ).
-   - **Màn hình Live (Projector)**: `http://localhost:8000/live.html`
-   - **Trang quản trị (Admin)**: `http://localhost:8000/admin.html`
+```bash
+# Di chuyển vào thư mục dự án
+cd webvote
+
+# Khởi động PHP Server (chạy trên tất cả interface để mobile truy cập được)
+php -S 0.0.0.0:8000
+```
+
+### Truy cập
+| Trang | URL | Mô tả |
+|-------|-----|-------|
+| 📱 **Bình chọn** | `http://<IP>:8000/` | Trang cho khán giả vote |
+| 📺 **Live Results** | `http://<IP>:8000/live.html` | Màn hình LED/Projector |
+| 📷 **QR Code** | `http://<IP>:8000/qr.html` | Trang QR cho projector |
+| ⚙️ **Admin** | `http://<IP>:8000/admin.html` | Quản trị viên |
+| 🔐 **Login** | `http://<IP>:8000/login.html` | Đăng nhập admin |
 
 ## 🔐 Thông Tin Đăng Nhập
-
-Truy cập trang quản trị tại: [`/admin.html`](http://localhost:8000/admin.html)
 
 - **Username**: `admin`
 - **Password**: `yep2025`
 
-> **Lưu ý**: Thông tin đăng nhập được cấu hình trong file `api/login.php`. Hãy đổi mật khẩu khi triển khai thực tế.
+> **Lưu ý**: Đổi mật khẩu trong `api/login.php` trước khi triển khai thực tế.
 
 ## 📁 Cấu Trúc Dự Án
 
 ```
 webvote/
-├── index.html          # Giao diện bình chọn cho người dùng
-├── live.html           # Giao diện hiển thị kết quả (Racing Bar Chart)
+├── index.html          # Giao diện bình chọn (Voter)
+├── live.html           # Màn hình kết quả realtime (Projector)
+├── qr.html             # Trang QR Code riêng
 ├── admin.html          # Giao diện quản trị viên
 ├── login.html          # Trang đăng nhập Admin
 ├── js/
-│   ├── vote.js         # Logic xử lý bình chọn (Client)
-│   └── live.js         # Logic xử lý cập nhật biểu đồ (Client)
+│   ├── shared.js       # Utilities chung (time sync, countdown, toast)
+│   ├── vote.js         # Logic bình chọn (60s polling)
+│   ├── live.js         # Logic biểu đồ + confetti + sound (3s polling)
+│   └── admin.js        # Logic admin panel (10s polling)
 ├── api/                # Backend API (PHP)
 │   ├── performers.php  # CRUD tiết mục
 │   ├── votes.php       # Xử lý gửi phiếu, kiểm tra điều kiện
 │   ├── results.php     # Tính toán điểm số & xếp hạng
-│   ├── session.php     # Quản lý trạng thái phiên bình chọn
-│   ├── upload.php      # Xử lý upload ảnh
+│   ├── session.php     # Quản lý phiên bình chọn
+│   ├── server_info.php # API lấy IP server cho QR
+│   ├── export.php      # Xuất CSV/PDF
+│   ├── upload.php      # Upload ảnh
 │   └── login.php       # Xác thực Admin
-├── data/               # Nơi lưu trữ dữ liệu (JSON)
+├── data/               # Lưu trữ dữ liệu (JSON)
 │   ├── performers.json # Danh sách tiết mục
 │   ├── votes.json      # Dữ liệu phiếu bầu
-│   └── session.json    # Trạng thái phiên hiện tại
-└── uploads/            # Thư mục lưu ảnh tiết mục
+│   └── session.json    # Trạng thái phiên
+├── lib/
+│   └── fpdf/           # Thư viện xuất PDF
+└── uploads/            # Ảnh tiết mục
 ```
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: HTML5, Tailwind CSS (CDN), Vanilla JavaScript.
-- **Charts**: Chart.js + chartjs-plugin-datalabels.
-- **Icons**: Remix Icon.
-- **Backend**: PHP (Native, không Framework).
-- **Database**: JSON Files (NoSQL-like storage, không cần cài đặt MySQL).
-
-## 🧩 Cài đặt Skills Nâng Cao (AI Agents)
-
-Để tăng cường khả năng của AI Agent (Cursor/Windsurf/Antigravity) khi làm việc với dự án này, bạn có thể cài đặt thêm các bộ skills chuyên dụng vào thư mục `.agent`.
-
-### 1. UI/UX Pro Max Skill
-Bộ skill giúp tối ưu hóa giao diện và trải nghiệm người dùng theo chuẩn hiện đại.
-
-```bash
-# Di chuyển vào thư mục skills của agent
-mkdir -p .agent/skills
-cd .agent/skills
-
-# Clone repository
-git clone https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git ui-ux-pro-max
-```
-
-### 2. Antigravity Awesome Skills
-Bộ sưu tập các skills mạnh mẽ cho Antigravity Agent.
-
-```bash
-# Tại thư mục .agent/skills (nếu chưa vào)
-cd .agent/skills
-
-# Clone repository
-git clone https://github.com/sickn33/antigravity-awesome-skills.git antigravity-awesome
-```
-
-> **Lưu ý**: Sau khi cài đặt, hãy reload lại window (Developer: Reload Window) hoặc restart IDE để Agent nhận diện skills mới.
+| Layer | Công nghệ |
+|-------|-----------|
+| **Frontend** | HTML5, Tailwind CSS (CDN), Vanilla JavaScript |
+| **Charts** | Chart.js + chartjs-plugin-datalabels |
+| **Audio** | Web Audio API (tones động) |
+| **Confetti** | canvas-confetti (CDN) |
+| **Icons** | Remix Icon |
+| **Backend** | PHP 7.4+ (Native) |
+| **Database** | JSON Files (không cần MySQL) |
+| **PDF Export** | FPDF Library |
 
 ## 📝 API Endpoints
 
 | Method | Endpoint | Mô tả |
-| :--- | :--- | :--- |
+|--------|----------|-------|
 | `GET` | `/api/performers.php` | Lấy danh sách tiết mục |
-| `POST` | `/api/performers.php` | Thêm mới / Cập nhật tiết mục |
+| `POST` | `/api/performers.php` | Thêm/Cập nhật tiết mục |
 | `DELETE` | `/api/performers.php?id={id}` | Xóa tiết mục |
-| `GET` | `/api/votes.php?check=1` | Kiểm tra trạng thái đã bầu chọn của user |
-| `POST` | `/api/votes.php` | Gửi phiếu bầu mới |
-| `GET` | `/api/results.php` | Lấy kết quả xếp hạng & điểm số |
-| `POST` | `/api/session.php` | Mở/Đóng phiên bình chọn (action: open/close) |
+| `GET` | `/api/votes.php?check=1` | Kiểm tra trạng thái đã vote |
+| `POST` | `/api/votes.php` | Gửi phiếu bầu |
+| `DELETE` | `/api/votes.php` | Xóa tất cả phiếu (Admin) |
+| `GET` | `/api/results.php` | Lấy kết quả xếp hạng |
+| `POST` | `/api/session.php` | Mở/Đóng phiên (action: open/close) |
+| `GET` | `/api/session.php` | Lấy trạng thái phiên hiện tại |
+| `GET` | `/api/server_info.php` | Lấy IP server cho QR |
+| `GET` | `/api/export.php?format=csv` | Xuất kết quả CSV |
+| `GET` | `/api/export.php?format=pdf` | Xuất kết quả PDF |
 
 ## ⚠️ Lưu Ý Quan Trọng
-1. **Reset Dữ Liệu**: Trước khi bắt đầu sự kiện chính thức, hãy vào Admin -> "Xóa tất cả phiếu" để đảm bảo tính công bằng.
-2. **Mạng LAN**: Để người dùng truy cập được bằng điện thoại, máy chủ (laptop chạy PHP) và điện thoại phải cùng mạng Wifi. Thay `localhost` bằng địa chỉ IP của máy (ví dụ `192.168.1.x`).
+
+1. **Reset Dữ Liệu**: Trước sự kiện, vào Admin → "Xóa tất cả phiếu" để xóa dữ liệu test.
+2. **Mạng LAN**: Máy chủ và điện thoại phải cùng mạng Wifi. Dùng IP LAN thay vì `localhost`.
+3. **Server Specs**: 
+   - Tối thiểu: 1 vCPU, 1GB RAM (hỗ trợ ~100 voters)
+   - Khuyến nghị: 2 vCPU, 2GB RAM (>200 voters)
+
+## 📚 Tài Liệu Liên Quan
+
+- [USER_GUIDE.md](USER_GUIDE.md) - Hướng dẫn sử dụng chi tiết cho BTC, Kỹ thuật, Khán giả
+- [REVIEW.md](REVIEW.md) - Review kỹ thuật và roadmap tính năng
+
+## 📜 License
+
+MIT License - Sử dụng tự do cho mục đích thương mại và phi thương mại.

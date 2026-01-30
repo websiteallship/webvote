@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YEP Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="icon" type="image/png" href="images/logo.png">
-    
+
     <script>
         tailwind.config = {
             theme: {
@@ -19,6 +21,7 @@
         }
     </script>
 </head>
+
 <body class="bg-gray-50">
     <!-- Top Navigation Bar -->
     <nav class="bg-white shadow-sm border-b sticky top-0 z-50">
@@ -27,26 +30,35 @@
                 <div class="flex items-center gap-8">
                     <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
                         <img src="images/logo.png" alt="Allship Logo" class="h-8">
-                        <h1 class="text-xl font-bold text-gray-800">YEP Admin</h1>
+                        <h1 class="text-xl font-bold text-gray-800">Admin Panel</h1>
                     </a>
                     <div class="hidden md:flex gap-1">
-                        <a href="#performers" onclick="showTab('performers')" id="tab-performers" class="tab-link px-4 py-2 rounded-lg text-sm font-medium text-purple-600 bg-purple-50">
+                        <a href="#performers" onclick="showTab('performers')" id="tab-performers"
+                            class="tab-link px-4 py-2 rounded-lg text-sm font-medium text-purple-600 bg-purple-50">
                             <i class="ri-music-2-line"></i> Tiết mục
                         </a>
-                        <a href="#votes" onclick="showTab('votes')" id="tab-votes" class="tab-link px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100">
+                        <a href="#votes" onclick="showTab('votes')" id="tab-votes"
+                            class="tab-link px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100">
                             <i class="ri-file-list-3-line"></i> Phiếu bầu
                         </a>
-                        <a href="live.html" target="_blank" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100">
+                        <a href="live.html" target="_blank"
+                            class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100">
                             <i class="ri-live-line"></i> Xem Live
+                        </a>
+                        <a href="qr.html" target="_blank"
+                            class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100">
+                            <i class="ri-qr-code-line"></i> QR Code
                         </a>
                     </div>
                 </div>
                 <div class="flex gap-2 items-center">
-                    <button onclick="logout()" class="hidden md:block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg">
+                    <button onclick="logout()"
+                        class="hidden md:block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg">
                         <i class="ri-logout-box-line"></i> Đăng xuất
                     </button>
                     <!-- Mobile Menu Button -->
-                    <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-700 hover:bg-gray-100 rounded-lg">
+                    <button onclick="toggleMobileMenu()"
+                        class="md:hidden p-2 text-gray-700 hover:bg-gray-100 rounded-lg">
                         <i id="mobile-menu-icon" class="ri-menu-line text-2xl"></i>
                     </button>
                 </div>
@@ -64,17 +76,25 @@
                 </button>
             </div>
             <div class="flex flex-col p-4 gap-2">
-                <a href="#performers" onclick="showTab('performers'); toggleMobileMenu()" class="px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 flex items-center gap-2">
+                <a href="#performers" onclick="showTab('performers'); toggleMobileMenu()"
+                    class="px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 flex items-center gap-2">
                     <i class="ri-music-2-line"></i> Tiết mục
                 </a>
-                <a href="#votes" onclick="showTab('votes'); toggleMobileMenu()" class="px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 flex items-center gap-2">
+                <a href="#votes" onclick="showTab('votes'); toggleMobileMenu()"
+                    class="px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 flex items-center gap-2">
                     <i class="ri-file-list-3-line"></i> Phiếu bầu
                 </a>
-                <a href="live.html" target="_blank" class="px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 flex items-center gap-2">
+                <a href="live.html" target="_blank"
+                    class="px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 flex items-center gap-2">
                     <i class="ri-live-line"></i> Xem Live
                 </a>
+                <a href="qr.html" target="_blank"
+                    class="px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 flex items-center gap-2">
+                    <i class="ri-qr-code-line"></i> QR Code
+                </a>
                 <hr class="my-2">
-                <button onclick="logout()" class="px-4 py-3 rounded-lg text-sm font-medium text-red-600 hover:bg-red-50 flex items-center gap-2 text-left w-full">
+                <button onclick="logout()"
+                    class="px-4 py-3 rounded-lg text-sm font-medium text-red-600 hover:bg-red-50 flex items-center gap-2 text-left w-full">
                     <i class="ri-logout-box-line"></i> Đăng xuất
                 </button>
             </div>
@@ -97,7 +117,8 @@
                         </div>
                     </div>
                 </div>
-                <div onclick="showTab('votes')" class="bg-white p-4 rounded-xl shadow-sm border cursor-pointer hover:shadow-md hover:border-blue-300 transition-all">
+                <div onclick="showTab('votes')"
+                    class="bg-white p-4 rounded-xl shadow-sm border cursor-pointer hover:shadow-md hover:border-blue-300 transition-all">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-sm text-gray-500">Tổng phiếu bầu</p>
@@ -136,7 +157,8 @@
                         <!-- Duration selector -->
                         <div id="duration-selector" class="flex items-center gap-2 bg-white/20 rounded-lg px-4 py-2">
                             <label class="text-sm font-medium">Thời gian:</label>
-                            <select id="session-duration" class="bg-white/30 rounded px-3 py-1 text-sm font-medium outline-none">
+                            <select id="session-duration"
+                                class="bg-white/30 rounded px-3 py-1 text-sm font-medium outline-none">
                                 <option value="3">3 phút</option>
                                 <option value="5" selected>5 phút</option>
                                 <option value="10">10 phút</option>
@@ -145,10 +167,12 @@
                             </select>
                         </div>
                         <!-- Control buttons -->
-                        <button id="btn-open-session" onclick="openSession()" class="bg-white text-purple-600 font-bold px-6 py-2 rounded-lg hover:bg-gray-100 transition-colors hidden">
+                        <button id="btn-open-session" onclick="openSession()"
+                            class="bg-white text-purple-600 font-bold px-6 py-2 rounded-lg hover:bg-gray-100 transition-colors hidden">
                             <i class="ri-play-fill"></i> Mở Phiên
                         </button>
-                        <button id="btn-close-session" onclick="closeSession()" class="bg-red-500 text-white font-bold px-6 py-2 rounded-lg hover:bg-red-600 transition-colors hidden">
+                        <button id="btn-close-session" onclick="closeSession()"
+                            class="bg-red-500 text-white font-bold px-6 py-2 rounded-lg hover:bg-red-600 transition-colors hidden">
                             <i class="ri-stop-fill"></i> Đóng Phiên
                         </button>
                     </div>
@@ -168,41 +192,51 @@
                 </h2>
                 <form id="performer-form" onsubmit="savePerformer(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <input type="hidden" id="p-id">
-                    
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Tên tiết mục</label>
-                        <input type="text" id="p-name" placeholder="Vũ điệu Marketing" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-200 focus:border-purple-500 outline-none" required>
+                        <input type="text" id="p-name" placeholder="Vũ điệu Marketing"
+                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-200 focus:border-purple-500 outline-none"
+                            required>
                     </div>
-                    
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Người biểu diễn</label>
-                        <input type="text" id="p-performer" placeholder="Marketing Team" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-200 focus:border-purple-500 outline-none" required>
+                        <input type="text" id="p-performer" placeholder="Marketing Team"
+                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-200 focus:border-purple-500 outline-none"
+                            required>
                     </div>
-                    
+
                     <div class="md:col-span-2">
                         <label class="block text-sm font-medium text-gray-700 mb-2">Hình ảnh</label>
                         <div class="flex gap-2">
-                            <input type="text" id="p-image" placeholder="URL hoặc upload file" class="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-200 focus:border-purple-500 outline-none" required>
-                            <label class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg cursor-pointer flex items-center gap-2 text-sm font-medium text-gray-700 border">
+                            <input type="text" id="p-image" placeholder="URL hoặc upload file"
+                                class="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-200 focus:border-purple-500 outline-none"
+                                required>
+                            <label
+                                class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg cursor-pointer flex items-center gap-2 text-sm font-medium text-gray-700 border">
                                 <i class="ri-upload-2-line"></i> Chọn file
-                                <input type="file" id="image-upload" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
+                                <input type="file" id="image-upload" accept="image/*" class="hidden"
+                                    onchange="handleImageUpload(event)">
                             </label>
                         </div>
                         <div id="upload-preview" class="mt-2 hidden">
                             <img id="preview-img" src="" class="w-32 h-32 object-cover rounded-lg border">
                         </div>
                     </div>
-                    
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Màu đại diện</label>
                         <input type="color" id="p-color" class="h-10 w-full rounded-lg cursor-pointer" value="#6366f1">
                     </div>
-                    
+
                     <div class="flex items-end gap-2">
-                        <button type="submit" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-lg transition-colors">
+                        <button type="submit"
+                            class="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-lg transition-colors">
                             <i class="ri-save-line"></i> Lưu
                         </button>
-                        <button type="button" onclick="resetForm()" class="px-6 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium rounded-lg transition-colors">
+                        <button type="button" onclick="resetForm()"
+                            class="px-6 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium rounded-lg transition-colors">
                             Hủy
                         </button>
                     </div>
@@ -221,9 +255,11 @@
                                 <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">ID</th>
                                 <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Hình</th>
                                 <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tên</th>
-                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Người biểu diễn</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Người biểu
+                                    diễn</th>
                                 <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Màu</th>
-                                <th class="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">Hành động</th>
+                                <th class="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">Hành động
+                                </th>
                             </tr>
                         </thead>
                         <tbody id="performers-table" class="divide-y">
@@ -237,20 +273,37 @@
         <!-- Votes Tab -->
         <div id="content-votes" class="tab-content hidden">
             <div class="bg-white rounded-xl shadow-sm border overflow-hidden">
-                <div class="p-4 border-b bg-gray-50">
+                <div class="p-4 border-b bg-gray-50 flex justify-between items-center">
                     <h2 class="text-lg font-bold">Danh sách phiếu bầu (<span id="vote-count">0</span>)</h2>
+                    <div class="flex gap-2">
+                        <button onclick="exportResults('csv')"
+                            class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg transition-colors flex items-center gap-2">
+                            <i class="ri-file-excel-2-line"></i> Xuất CSV
+                        </button>
+                        <button onclick="exportResults('pdf')"
+                            class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors flex items-center gap-2">
+                            <i class="ri-file-pdf-line"></i> Xuất PDF
+                        </button>
+                    </div>
                 </div>
                 <div class="overflow-x-auto max-h-[600px]">
                     <table class="w-full">
                         <thead class="bg-gray-50 border-b sticky top-0">
                             <tr>
-                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Thời gian</th>
-                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Người bầu</th>
-                                <th class="px-4 py-3 text-left text-xs font-medium text-yellow-600 uppercase">Hạng 1 (3đ)</th>
-                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Hạng 2 (2đ)</th>
-                                <th class="px-4 py-3 text-left text-xs font-medium text-orange-700 uppercase">Hạng 3 (1đ)</th>
-                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Địa chỉ IP</th>
-                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Thiết bị</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Thời gian
+                                </th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Người bầu
+                                </th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-yellow-600 uppercase">Hạng 1
+                                    (3đ)</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Hạng 2 (2đ)
+                                </th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-orange-700 uppercase">Hạng 3
+                                    (1đ)</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Địa chỉ IP
+                                </th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Thiết bị
+                                </th>
                             </tr>
                         </thead>
                         <tbody id="votes-table" class="divide-y">
@@ -264,7 +317,8 @@
 
     <!-- Toast Notification -->
     <div id="toast" class="fixed top-4 right-4 z-[100] hidden translate-x-full transition-transform duration-300">
-        <div class="bg-white shadow-2xl rounded-xl p-4 flex items-center gap-3 border-l-4 min-w-[300px]" id="toast-container">
+        <div class="bg-white shadow-2xl rounded-xl p-4 flex items-center gap-3 border-l-4 min-w-[300px]"
+            id="toast-container">
             <i id="toast-icon" class="text-2xl"></i>
             <div class="flex-1">
                 <p class="text-sm font-bold text-gray-800" id="toast-title">Thông báo</p>
@@ -273,385 +327,10 @@
         </div>
     </div>
 
-    <script>
-        let performers = [];
-        let votes = [];
-
-        async function loadData() {
-            const [perfRes, voteRes] = await Promise.all([
-                fetch('api/performers.php'),
-                fetch('api/votes.php')
-            ]);
-            performers = await perfRes.json();
-            votes = await voteRes.json();
-            
-            renderTable();
-            renderVotes();
-            updateStats();
-        }
-
-        function updateStats() {
-            document.getElementById('total-performers').textContent = performers.length;
-            document.getElementById('total-votes-stat').textContent = votes.length;
-        }
-
-        function showTab(tab) {
-            // Hide all tabs
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.tab-link').forEach(el => {
-                el.classList.remove('text-purple-600', 'bg-purple-50');
-                el.classList.add('text-gray-600');
-            });
-            
-            // Show selected tab
-            document.getElementById('content-' + tab).classList.remove('hidden');
-            document.getElementById('tab-' + tab).classList.add('text-purple-600', 'bg-purple-50');
-            document.getElementById('tab-' + tab).classList.remove('text-gray-600');
-        }
-
-        function renderVotes() {
-            const tbody = document.getElementById('votes-table');
-            const reversedVotes = [...votes].reverse();
-            
-            document.getElementById('vote-count').textContent = votes.length;
-            
-            tbody.innerHTML = reversedVotes.map(v => {
-                const p1 = performers.find(p => p.id == v.votes.rank1)?.name || '---';
-                const p2 = performers.find(p => p.id == v.votes.rank2)?.name || '---';
-                const p3 = performers.find(p => p.id == v.votes.rank3)?.name || '---';
-                const date = new Date(v.timestamp).toLocaleString('vi-VN');
-                const ip = v.ip_address || 'N/A';
-                const device = v.device || 'N/A';
-                return `
-                <tr class="hover:bg-gray-50">
-                    <td class="px-4 py-3 text-sm text-gray-500">${date}</td>
-                    <td class="px-4 py-3 text-sm font-bold text-gray-800">${v.voter}</td>
-                    <td class="px-4 py-3 text-sm text-yellow-600 font-medium">${p1}</td>
-                    <td class="px-4 py-3 text-sm text-gray-600">${p2}</td>
-                    <td class="px-4 py-3 text-sm text-orange-800">${p3}</td>
-                    <td class="px-4 py-3 text-sm text-gray-500 font-mono">${ip}</td>
-                    <td class="px-4 py-3 text-sm text-gray-600">${device}</td>
-                </tr>`;
-            }).join('');
-        }
-
-        function renderTable() {
-            const tbody = document.getElementById('performers-table');
-            tbody.innerHTML = performers.map(p => `
-                <tr class="hover:bg-gray-50">
-                    <td class="px-4 py-3 text-sm text-gray-500">${p.id}</td>
-                    <td class="px-4 py-3">
-                        <img src="${p.image}" class="w-12 h-12 rounded-lg object-cover border">
-                    </td>
-                    <td class="px-4 py-3 text-sm font-bold text-gray-800">${p.name}</td>
-                    <td class="px-4 py-3 text-sm text-gray-600">${p.performer}</td>
-                    <td class="px-4 py-3">
-                        <div class="w-8 h-8 rounded-full border-2 border-gray-200" style="background:${p.color}"></div>
-                    </td>
-                    <td class="px-4 py-3 text-right">
-                        <button onclick='editPerformer(${JSON.stringify(p)})' class="text-blue-600 hover:text-blue-700 mr-3">
-                            <i class="ri-edit-line text-lg"></i>
-                        </button>
-                        <button onclick="deletePerformer(${p.id})" class="text-red-600 hover:text-red-700">
-                            <i class="ri-delete-bin-line text-lg"></i>
-                        </button>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        async function handleImageUpload(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            const formData = new FormData();
-            formData.append('image', file);
-
-            try {
-                const response = await fetch('api/upload.php', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const result = await response.json();
-                
-                if (result.success) {
-                    document.getElementById('p-image').value = result.url;
-                    document.getElementById('preview-img').src = result.url;
-                    document.getElementById('upload-preview').classList.remove('hidden');
-                } else {
-                    alert('Lỗi upload: ' + result.message);
-                }
-            } catch (error) {
-                alert('Lỗi kết nối server!');
-            }
-        }
-
-        async function savePerformer(e) {
-            e.preventDefault();
-            const data = {
-                id: document.getElementById('p-id').value || undefined,
-                name: document.getElementById('p-name').value,
-                performer: document.getElementById('p-performer').value,
-                image: document.getElementById('p-image').value,
-                color: document.getElementById('p-color').value
-            };
-
-            try {
-                await fetch('api/performers.php', {
-                    method: 'POST',
-                    body: JSON.stringify(data)
-                });
-                resetForm();
-                await loadData();
-                showToast('success', 'Thành công', data.id ? 'Đã cập nhật tiết mục!' : 'Đã thêm tiết mục mới!');
-            } catch (error) {
-                showToast('error', 'Lỗi', 'Không thể lưu tiết mục!');
-            }
-        }
-
-        function editPerformer(p) {
-            document.getElementById('p-id').value = p.id;
-            document.getElementById('p-name').value = p.name;
-            document.getElementById('p-performer').value = p.performer;
-            document.getElementById('p-image').value = p.image;
-            document.getElementById('p-color').value = p.color;
-            document.getElementById('form-title').textContent = 'Sửa Tiết Mục';
-            
-            // Show preview
-            document.getElementById('preview-img').src = p.image;
-            document.getElementById('upload-preview').classList.remove('hidden');
-            
-            // Scroll to form
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        async function deletePerformer(id) {
-            // Custom confirmation dialog
-            if(!confirm('⚠️ Xác nhận xóa tiết mục?\n\nBạn có chắc chắn muốn xóa tiết mục này không?')) return;
-            
-            try {
-                await fetch(`api/performers.php?id=${id}`, { method: 'DELETE' });
-                await loadData();
-                showToast('success', 'Đã xóa', 'Tiết mục đã được xóa thành công!');
-            } catch (error) {
-                showToast('error', 'Lỗi', 'Không thể xóa tiết mục!');
-            }
-        }
-
-        async function resetVotes() {
-            // Custom confirmation dialog
-            if(!confirm('🚨 CẢNH BÁO: XÓA TẤT CẢ PHIẾU BẦU\n\nHành động này sẽ xóa TOÀN BỘ dữ liệu phiếu bầu và KHÔNG THỂ KHÔI PHỤC!\n\nBạn có chắc chắn muốn tiếp tục?')) return;
-            
-            try {
-                await fetch('api/votes.php', { method: 'DELETE' });
-                await loadData();
-                showToast('success', 'Đã xóa', 'Tất cả phiếu bầu đã được xóa!');
-            } catch (error) {
-                showToast('error', 'Lỗi', 'Không thể xóa phiếu bầu!');
-            }
-        }
-
-        function resetForm() {
-            document.getElementById('performer-form').reset();
-            document.getElementById('p-id').value = '';
-            document.getElementById('form-title').textContent = 'Thêm Tiết Mục Mới';
-            document.getElementById('upload-preview').classList.add('hidden');
-        }
-
-        async function logout() {
-            await fetch('api/login.php', { method: 'DELETE' });
-            window.location.href = 'login.html';
-        }
-
-        // Toast Notification Function
-        function showToast(type, title, message) {
-            const toast = document.getElementById('toast');
-            const container = document.getElementById('toast-container');
-            const icon = document.getElementById('toast-icon');
-            const titleEl = document.getElementById('toast-title');
-            const messageEl = document.getElementById('toast-message');
-
-            // Set content
-            titleEl.textContent = title;
-            messageEl.textContent = message;
-
-            // Set style based on type
-            if (type === 'success') {
-                container.className = 'bg-white shadow-2xl rounded-xl p-4 flex items-center gap-3 border-l-4 border-green-500 min-w-[300px]';
-                icon.className = 'ri-checkbox-circle-fill text-2xl text-green-500';
-            } else if (type === 'error') {
-                container.className = 'bg-white shadow-2xl rounded-xl p-4 flex items-center gap-3 border-l-4 border-red-500 min-w-[300px]';
-                icon.className = 'ri-error-warning-fill text-2xl text-red-500';
-            } else if (type === 'info') {
-                container.className = 'bg-white shadow-2xl rounded-xl p-4 flex items-center gap-3 border-l-4 border-blue-500 min-w-[300px]';
-                icon.className = 'ri-information-fill text-2xl text-blue-500';
-            }
-
-            // Show toast
-            toast.classList.remove('hidden');
-            setTimeout(() => {
-                toast.classList.remove('translate-x-full');
-                toast.classList.add('translate-x-0');
-            }, 10);
-
-            // Hide after 3 seconds
-            setTimeout(() => {
-                toast.classList.remove('translate-x-0');
-                toast.classList.add('translate-x-full');
-                setTimeout(() => {
-                    toast.classList.add('hidden');
-                }, 300);
-            }, 3000);
-        }
-
-        // Session Management
-        let sessionInterval = null;
-
-        async function loadSession() {
-            try {
-                const response = await fetch('api/session.php');
-                const session = await response.json();
-                updateSessionUI(session);
-            } catch (error) {
-                console.error('Failed to load session:', error);
-            }
-        }
-
-        function updateSessionUI(session) {
-            const statusText = document.getElementById('session-status-text');
-            const btnOpen = document.getElementById('btn-open-session');
-            const btnClose = document.getElementById('btn-close-session');
-            const countdown = document.getElementById('session-countdown');
-            const durationSelector = document.getElementById('duration-selector');
-
-            if (session.status === 'open') {
-                statusText.textContent = `Đang mở - Kết thúc: ${new Date(session.end_time).toLocaleTimeString('vi-VN')}`;
-                btnOpen.classList.add('hidden');
-                btnClose.classList.remove('hidden');
-                countdown.classList.remove('hidden');
-                durationSelector.classList.add('hidden');
-                
-                // Start countdown
-                if (sessionInterval) clearInterval(sessionInterval);
-                sessionInterval = setInterval(() => updateCountdown(session.end_time), 1000);
-                updateCountdown(session.end_time);
-            } else if (session.status === 'expired') {
-                statusText.textContent = 'Đã hết thời gian';
-                btnOpen.classList.remove('hidden');
-                btnClose.classList.add('hidden');
-                countdown.classList.add('hidden');
-                durationSelector.classList.remove('hidden');
-                if (sessionInterval) clearInterval(sessionInterval);
-            } else {
-                statusText.textContent = 'Chưa mở phiên';
-                btnOpen.classList.remove('hidden');
-                btnClose.classList.add('hidden');
-                countdown.classList.add('hidden');
-                durationSelector.classList.remove('hidden');
-                if (sessionInterval) clearInterval(sessionInterval);
-            }
-        }
-
-        function updateCountdown(endTime) {
-            const now = new Date().getTime();
-            // Parse the datetime string correctly (PHP format: Y-m-d H:i:s)
-            // Replace space with T to make it ISO-like, then parse as local time
-            const endTimeStr = endTime.replace(' ', 'T');
-            const end = new Date(endTimeStr).getTime();
-            const remaining = Math.max(0, end - now);
-
-            const minutes = Math.floor(remaining / 60000);
-            const seconds = Math.floor((remaining % 60000) / 1000);
-
-            const display = document.getElementById('countdown-display');
-            if (display) {
-                display.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-            }
-
-            if (remaining <= 0) {
-                clearInterval(sessionInterval);
-                loadSession(); // Reload to show expired state
-            }
-        }
-
-        async function openSession() {
-            const duration = document.getElementById('session-duration').value;
-            
-            if (!confirm(`🎯 Mở phiên bình chọn ${duration} phút?\n\nNgười dùng sẽ có thể bình chọn ngay sau khi mở phiên.`)) return;
-
-            try {
-                const response = await fetch('api/session.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        action: 'open',
-                        duration: parseInt(duration)
-                    })
-                });
-
-                const result = await response.json();
-                if (result.success) {
-                    await loadSession();
-                    showToast('success', 'Đã mở phiên', `Phiên bình chọn ${duration} phút đã được mở!`);
-                } else {
-                    showToast('error', 'Lỗi', 'Không thể mở phiên bình chọn!');
-                }
-            } catch (error) {
-                showToast('error', 'Lỗi', 'Không thể kết nối đến server!');
-            }
-        }
-
-        async function closeSession() {
-            if (!confirm('⏹️ Đóng phiên bình chọn?\n\nNgười dùng sẽ không thể bình chọn sau khi đóng phiên.')) return;
-
-            try {
-                const response = await fetch('api/session.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action: 'close' })
-                });
-
-                const result = await response.json();
-                if (result.success) {
-                    await loadSession();
-                    showToast('info', 'Đã đóng phiên', 'Phiên bình chọn đã được đóng!');
-                } else {
-                    showToast('error', 'Lỗi', 'Không thể đóng phiên bình chọn!');
-                }
-            } catch (error) {
-                showToast('error', 'Lỗi', 'Không thể kết nối đến server!');
-            }
-        }
-
-        // Check authentication on page load
-        async function checkAuth() {
-            try {
-                const response = await fetch('api/login.php');
-                const result = await response.json();
-                
-                if (!result.logged_in) {
-                    window.location.href = 'login.html';
-                }
-            } catch (error) {
-                console.error('Auth check failed:', error);
-                window.location.href = 'login.html';
-            }
-        }
-
-        // Mobile Menu Toggle
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
-
-        // Run auth check first, then load data
-        checkAuth().then(() => {
-            loadData();
-            loadSession();
-            // Refresh session every 10 seconds
-            setInterval(loadSession, 10000);
-        });
-    </script>
+    <!-- Load shared utilities first -->
+    <script src="js/shared.js"></script>
+    <!-- Load admin-specific JavaScript -->
+    <script src="js/admin.js"></script>
 </body>
+
 </html>

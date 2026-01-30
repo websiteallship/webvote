@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code - Bình Chọn ALLSHIP GALA DINNER</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/logo.png">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Be Vietnam Pro', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+    </style>
+</head>
+
+<body class="flex items-center justify-center min-h-screen p-8">
+
+    <!-- Main Container -->
+    <div class="text-center max-w-2xl mx-auto">
+
+
+        <!-- Title -->
+        <h1
+            class="text-4xl md:text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 mb-4">
+            Bình Chọn ALLSHIP GALA DINNER
+        </h1>
+        <p class="text-gray-400 text-lg mb-12">Quét mã QR để tham gia bình chọn</p>
+
+        <!-- QR Code Container -->
+        <div class="bg-white p-8 rounded-3xl shadow-2xl inline-block mb-8">
+            <img id="qr-code" src="" alt="QR Code" class="w-80 h-80 mx-auto">
+        </div>
+
+        <!-- URL Display -->
+        <div class="bg-white/10 backdrop-blur-sm rounded-2xl px-8 py-4 inline-block mb-12">
+            <p class="text-sm text-gray-400 mb-1">Hoặc truy cập trực tiếp:</p>
+            <p id="voting-url-display" class="text-xl font-mono text-white font-bold"></p>
+        </div>
+
+        <!-- Instructions -->
+        <div class="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 text-gray-400 mb-8">
+            <div class="flex items-center gap-2">
+                <i class="ri-smartphone-line text-2xl text-blue-400"></i>
+                <span>Mở camera điện thoại</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="ri-qr-scan-line text-2xl text-purple-400"></i>
+                <span>Quét mã QR</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="ri-checkbox-circle-line text-2xl text-green-400"></i>
+                <span>Bắt đầu bình chọn</span>
+            </div>
+        </div>
+
+        <!-- Refresh Button -->
+        <button onclick="updateQRCode()"
+            class="mt-8 px-6 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-xl transition-all flex items-center gap-2 mx-auto">
+            <i class="ri-refresh-line"></i>
+            <span>Làm mới QR Code</span>
+        </button>
+    </div>
+
+    <script>
+        // Dynamic QR Code Generation
+        async function updateQRCode() {
+            try {
+                let votingUrl;
+
+                // Try to get URL from server API
+                try {
+                    const response = await fetch('api/server_info.php');
+                    const data = await response.json();
+                    votingUrl = data.voting_url;
+                } catch (error) {
+                    // Fallback to client-side detection
+                    console.warn('Failed to fetch server info, using client-side detection:', error);
+                    votingUrl = `${window.location.protocol}//${window.location.host}/`;
+                }
+
+                // Generate QR code URL (400x400 for large display)
+                const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodeURIComponent(votingUrl)}`;
+
+                // Update QR code image
+                const qrImg = document.getElementById('qr-code');
+                if (qrImg) {
+                    qrImg.src = qrApiUrl;
+                    qrImg.alt = `QR Code: ${votingUrl}`;
+                }
+
+                // Update URL display
+                const urlDisplay = document.getElementById('voting-url-display');
+                if (urlDisplay) {
+                    urlDisplay.textContent = votingUrl;
+                }
+
+                console.log('QR Code updated:', votingUrl);
+            } catch (error) {
+                console.error('Failed to update QR code:', error);
+            }
+        }
+
+        // Initialize on page load
+        updateQRCode();
+    </script>
+</body>
+
+</html>
