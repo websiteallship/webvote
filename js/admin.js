@@ -94,6 +94,24 @@ function showTab(tab) {
 }
 
 // ============================================
+// BROWSER DETECTION
+// ============================================
+
+function getBrowserName(userAgent) {
+    if (!userAgent || userAgent === 'Unknown') return 'Unknown';
+
+    // Detect browser from user agent string
+    if (userAgent.includes('Edg/')) return 'Edge';
+    if (userAgent.includes('Chrome/') && !userAgent.includes('Edg/')) return 'Chrome';
+    if (userAgent.includes('Safari/') && !userAgent.includes('Chrome/')) return 'Safari';
+    if (userAgent.includes('Firefox/')) return 'Firefox';
+    if (userAgent.includes('Opera/') || userAgent.includes('OPR/')) return 'Opera';
+    if (userAgent.includes('MSIE') || userAgent.includes('Trident/')) return 'IE';
+
+    return 'Other';
+}
+
+// ============================================
 // VOTES RENDERING
 // ============================================
 
@@ -159,6 +177,13 @@ function renderVotes() {
         tdDevice.className = 'px-4 py-3 text-sm text-gray-600';
         tdDevice.textContent = device;
         tr.appendChild(tdDevice);
+
+        // Browser cell
+        const tdBrowser = document.createElement('td');
+        tdBrowser.className = 'px-4 py-3 text-sm text-gray-600';
+        const browserName = getBrowserName(v.user_agent);
+        tdBrowser.textContent = browserName;
+        tr.appendChild(tdBrowser);
 
         tbody.appendChild(tr);
     });

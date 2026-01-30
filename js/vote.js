@@ -23,7 +23,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Check if already voted in current session
 async function checkVotedStatus() {
     try {
-        const res = await fetch('api/votes.php?check=1');
+        // Generate device fingerprint
+        const fingerprint = await generateFingerprint();
+
+        const res = await fetch(`api/votes.php?check=1&fp=${encodeURIComponent(fingerprint)}`);
         const data = await res.json();
 
         if (data.voted && data.session_active) {
@@ -255,8 +258,12 @@ async function submitVote() {
         return;
     }
 
+    // Generate device fingerprint
+    const fingerprint = await generateFingerprint();
+
     const payload = {
         voter: name,
+        fingerprint: fingerprint,
         votes: {
             rank1: votes[1],
             rank2: votes[2],

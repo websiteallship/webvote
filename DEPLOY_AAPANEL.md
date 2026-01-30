@@ -24,11 +24,11 @@ Trước khi làm bất kỳ cách nào, bạn cần đảm bảo code đã có 
     cd /www/wwwroot/vote-yep.allship.vn
 
     # Nếu thư mục trống, clone trực tiếp
-    git clone https://github.com/USERNAME/REPO_NAME.git .
+    git clone https://github.com/websiteallship/webvote.git .
 
     # Nếu thư mục đã có code cũ, khởi tạo git
     git init
-    git remote add origin https://github.com/USERNAME/REPO_NAME.git
+    git remote add origin https://github.com/websiteallship/webvote.git
     git fetch --all
     git reset --hard origin/main
     ```

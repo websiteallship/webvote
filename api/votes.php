@@ -60,15 +60,23 @@ function getVotes()
 }
 
 // Check if already voted in current session
-function hasVotedInSession($votes, $currentIP, $currentSessionId)
+// Priority: Fingerprint (most accurate) > IP + UserAgent (fallback)
+function hasVotedInSession($votes, $fingerprint, $currentIP, $userAgent, $currentSessionId)
 {
     foreach ($votes as $v) {
         // Skip votes from other sessions
         if (($v['session_id'] ?? '') !== $currentSessionId)
             continue;
 
-        // Check IP match (raw IP for comparison)
-        if (($v['ip_raw'] ?? '') === $currentIP) {
+        // Priority 1: Check fingerprint (most accurate - works across network changes)
+        if (!empty($fingerprint) && !empty($v['fingerprint']) && $v['fingerprint'] === $fingerprint) {
+            return true;
+        }
+
+        // Fallback: IP + UserAgent combination (for browsers blocking fingerprinting)
+        $sameIP = (($v['ip_raw'] ?? '') === $currentIP);
+        $sameUA = (($v['user_agent'] ?? '') === $userAgent);
+        if ($sameIP && $sameUA) {
             return true;
         }
     }
@@ -83,6 +91,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $session = getCurrentSession();
         $currentSessionId = $session['start_time'] ?? null;
         $currentIP = $_SERVER['REMOTE_ADDR'] ?? '';
+        $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+        $fingerprint = $_GET['fp'] ?? '';
 
         if (!$currentSessionId || $session['status'] !== 'open') {
             echo json_encode(['voted' => false, 'session_active' => false]);
@@ -90,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         }
 
         $votes = getVotes();
-        $hasVoted = hasVotedInSession($votes, $currentIP, $currentSessionId);
+        $hasVoted = hasVotedInSession($votes, $fingerprint, $currentIP, $userAgent, $currentSessionId);
 
         echo json_encode([
             'voted' => $hasVoted,
@@ -134,17 +144,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     $currentVotes = getVotes();
     $currentIP = $_SERVER['REMOTE_ADDR'] ?? '';
+    $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown';
+    $fingerprint = $input['fingerprint'] ?? '';
 
-    // Check duplicate: IP OR Name in same session
+    // Check duplicate: Fingerprint first, then IP+UserAgent fallback, then Name
     foreach ($currentVotes as $v) {
         // Skip votes from other sessions
         if (($v['session_id'] ?? '') !== $currentSessionId)
             continue;
 
-        $sameIP = (($v['ip_raw'] ?? '') === $currentIP);
-        $sameName = (strtolower($v['voter']) === strtolower($input['voter']));
-
-        if ($sameIP) {
+        // Priority 1: Check fingerprint match (most accurate)
+        if (!empty($fingerprint) && !empty($v['fingerprint']) && $v['fingerprint'] === $fingerprint) {
             echo json_encode([
                 'success' => false,
                 'already_voted' => true,
@@ -153,7 +163,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             exit;
         }
 
-        if ($sameName) {
+        // Fallback: IP + UserAgent (for browsers blocking fingerprinting)
+        $sameIP = (($v['ip_raw'] ?? '') === $currentIP);
+        $sameUA = (($v['user_agent'] ?? '') === $userAgent);
+        if ($sameIP && $sameUA) {
+            echo json_encode([
+                'success' => false,
+                'already_voted' => true,
+                'message' => 'Thiết bị của bạn đã bình chọn trong phiên này rồi!'
+            ]);
+            exit;
+        }
+
+        // Check duplicate name (still enforce unique names)
+        if (strtolower($v['voter']) === strtolower($input['voter'])) {
             echo json_encode([
                 'success' => false,
                 'already_voted' => true,
