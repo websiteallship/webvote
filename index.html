@@ -370,167 +370,173 @@
             </div>
             <h2 class="text-3xl font-bold text-gray-800 mb-2">Đã gửi bình chọn!</h2>
             <p class="text-gray-500 mb-8">Cảm ơn bạn đã tham gia bình chọn.</p>
-            <a href="live.html"
+            <!-- <a href="live.html"
                 class="inline-block px-8 py-3 bg-gray-100 rounded-xl text-gray-600 font-medium hover:bg-gray-200 transition-colors">
                 Xem kết quả trực tiếp
             </a>
         </div>
     </div>
 
-    <!-- Guide Modal -->
-    <div id="guide-modal" class="fixed inset-0 z-[70] hidden">
-        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="closeGuideModal()"></div>
-        <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-                <div class="glass-card rounded-2xl shadow-2xl p-5 md:p-8 border border-white/50 relative"
-                    id="guide-modal-content">
-                    <!-- Close Button -->
-                    <button onclick="closeGuideModal()"
-                        class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/80 hover:bg-white flex items-center justify-center transition-all shadow-lg group">
-                        <i class="ri-close-line text-2xl text-gray-600 group-hover:text-gray-800"></i>
-                    </button>
-
-                    <!-- Header -->
-                    <div class="text-center mb-8">
-                        <div
-                            class="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-                            <i class="ri-question-line text-3xl text-white"></i>
-                        </div>
-                        <h2
-                            class="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary mb-2">
-                            Hướng Dẫn Bình Chọn
-                        </h2>
-                        <p class="text-gray-500 font-medium">Dành cho Khán giả</p>
-                    </div>
-
-                    <!-- Content -->
-                    <div class="space-y-6">
-                        <!-- Section 1: Truy Cập -->
-                        <div class="bg-white/50 rounded-xl p-5 border border-white/60">
-                            <div class="flex items-center gap-3 mb-4">
-                                <div
-                                    class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-md">
-                                    <i class="ri-smartphone-line text-xl text-white"></i>
-                                </div>
-                                <h3 class="text-lg font-bold text-gray-800">1. Truy Cập</h3>
-                            </div>
-                            <ul class="space-y-2 text-gray-700">
-                                <li class="flex items-start gap-2">
-                                    <i class="ri-checkbox-circle-fill text-blue-500 mt-1"></i>
-                                    <span><strong>Cách 1:</strong> Quét mã QR Code hiển thị trên màn hình LED.</span>
-                                </li>
-                                <li class="flex items-start gap-2">
-                                    <i class="ri-checkbox-circle-fill text-blue-500 mt-1"></i>
-                                    <span><strong>Cách 2:</strong> Nhập đường link do BTC cung cấp vào trình
-                                        duyệt.</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <!-- Section 2: Cách Bình Chọn -->
-                        <div class="bg-white/50 rounded-xl p-5 border border-white/60">
-                            <div class="flex items-center gap-3 mb-4">
-                                <div
-                                    class="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center shadow-md">
-                                    <i class="ri-hand-coin-line text-xl text-white"></i>
-                                </div>
-                                <h3 class="text-lg font-bold text-gray-800">2. Cách Bình Chọn</h3>
-                            </div>
-                            <ol class="space-y-3 text-gray-700">
-                                <li class="flex items-start gap-2">
-                                    <span class="font-bold text-purple-600 min-w-[1.5rem]">1.</span>
-                                    <div>
-                                        <strong>Chọn 3 Tiết mục:</strong> Bấm vào các tiết mục bạn yêu thích.
-                                        <ul class="mt-2 ml-4 space-y-1">
-                                            <li class="flex items-center gap-2">
-                                                <span class="text-lg">🥇</span>
-                                                <span>Lần chọn 1: <strong>Hạng Nhất</strong> (3 điểm)</span>
-                                            </li>
-                                            <li class="flex items-center gap-2">
-                                                <span class="text-lg">🥈</span>
-                                                <span>Lần chọn 2: <strong>Hạng Nhì</strong> (2 điểm)</span>
-                                            </li>
-                                            <li class="flex items-center gap-2">
-                                                <span class="text-lg">🥉</span>
-                                                <span>Lần chọn 3: <strong>Hạng Ba</strong> (1 điểm)</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="flex items-start gap-2">
-                                    <span class="font-bold text-purple-600 min-w-[1.5rem]">2.</span>
-                                    <span><strong>Thay đổi lựa chọn:</strong> Bấm vào ô kết quả đã chọn để bỏ chọn và
-                                        chọn
-                                        lại.</span>
-                                </li>
-                                <li class="flex items-start gap-2">
-                                    <span class="font-bold text-purple-600 min-w-[1.5rem]">3.</span>
-                                    <div>
-                                        <strong>Gửi Phiếu:</strong>
-                                        <ul class="mt-2 ml-4 space-y-1">
-                                            <li>• Sau khi chọn đủ 3 tiết mục, nút <strong>"Gửi Bình Chọn"</strong> sẽ
-                                                sáng
-                                                lên.</li>
-                                            <li>• Bấm nút → Nhập Tên của bạn → Xác nhận.</li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ol>
-                        </div>
-
-                        <!-- Section 3: Quy Định -->
-                        <div class="bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-5 border border-orange-200">
-                            <div class="flex items-center gap-3 mb-4">
-                                <div
-                                    class="w-10 h-10 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center shadow-md">
-                                    <i class="ri-alert-line text-xl text-white"></i>
-                                </div>
-                                <h3 class="text-lg font-bold text-gray-800">3. Quy Định</h3>
-                            </div>
-                            <ul class="space-y-2 text-gray-700">
-                                <li class="flex items-start gap-2">
-                                    <i class="ri-error-warning-fill text-orange-500 mt-1"></i>
-                                    <span>Mỗi người (mỗi thiết bị/tên) chỉ được bình chọn <strong>1 lần duy
-                                            nhất</strong>
-                                        trong mỗi phiên.</span>
-                                </li>
-                                <li class="flex items-start gap-2">
-                                    <i class="ri-time-line text-orange-500 mt-1"></i>
-                                    <span>Chỉ được bình chọn khi MC thông báo "Bắt đầu" và phiên còn mở.</span>
-                                </li>
-                                <li class="flex items-start gap-2">
-                                    <i class="ri-signal-wifi-line text-orange-500 mt-1"></i>
-                                    <span>Đảm bảo kết nối Internet ổn định để bình chọn thành công.</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <!-- Footer -->
-                        <div class="text-center pt-4">
+    Guide Modal -->
+            <div id="guide-modal" class="fixed inset-0 z-[70] hidden">
+                <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="closeGuideModal()"></div>
+                <div class="flex items-center justify-center min-h-screen p-4">
+                    <div class="w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+                        <div class="glass-card rounded-2xl shadow-2xl p-5 md:p-8 border border-white/50 relative"
+                            id="guide-modal-content">
+                            <!-- Close Button -->
                             <button onclick="closeGuideModal()"
-                                class="px-8 py-3 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-xl shadow-lg hover:opacity-90 transition-opacity">
-                                Đã hiểu
+                                class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/80 hover:bg-white flex items-center justify-center transition-all shadow-lg group">
+                                <i class="ri-close-line text-2xl text-gray-600 group-hover:text-gray-800"></i>
                             </button>
+
+                            <!-- Header -->
+                            <div class="text-center mb-8">
+                                <div
+                                    class="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                                    <i class="ri-question-line text-3xl text-white"></i>
+                                </div>
+                                <h2
+                                    class="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary mb-2">
+                                    Hướng Dẫn Bình Chọn
+                                </h2>
+                                <p class="text-gray-500 font-medium">Dành cho Khán giả</p>
+                            </div>
+
+                            <!-- Content -->
+                            <div class="space-y-6">
+                                <!-- Section 1: Truy Cập -->
+                                <div class="bg-white/50 rounded-xl p-5 border border-white/60">
+                                    <div class="flex items-center gap-3 mb-4">
+                                        <div
+                                            class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-md">
+                                            <i class="ri-smartphone-line text-xl text-white"></i>
+                                        </div>
+                                        <h3 class="text-lg font-bold text-gray-800">1. Truy Cập</h3>
+                                    </div>
+                                    <ul class="space-y-2 text-gray-700">
+                                        <li class="flex items-start gap-2">
+                                            <i class="ri-checkbox-circle-fill text-blue-500 mt-1"></i>
+                                            <span><strong>Cách 1:</strong> Quét mã QR Code hiển thị trên màn hình
+                                                LED.</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <i class="ri-checkbox-circle-fill text-blue-500 mt-1"></i>
+                                            <span><strong>Cách 2:</strong> Nhập đường link do BTC cung cấp vào trình
+                                                duyệt.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Section 2: Cách Bình Chọn -->
+                                <div class="bg-white/50 rounded-xl p-5 border border-white/60">
+                                    <div class="flex items-center gap-3 mb-4">
+                                        <div
+                                            class="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center shadow-md">
+                                            <i class="ri-hand-coin-line text-xl text-white"></i>
+                                        </div>
+                                        <h3 class="text-lg font-bold text-gray-800">2. Cách Bình Chọn</h3>
+                                    </div>
+                                    <ol class="space-y-3 text-gray-700">
+                                        <li class="flex items-start gap-2">
+                                            <span class="font-bold text-purple-600 min-w-[1.5rem]">1.</span>
+                                            <div>
+                                                <strong>Chọn 3 Tiết mục:</strong> Bấm vào các tiết mục bạn yêu thích.
+                                                <ul class="mt-2 ml-4 space-y-1">
+                                                    <li class="flex items-center gap-2">
+                                                        <span class="text-lg">🥇</span>
+                                                        <span>Lần chọn 1: <strong>Hạng Nhất</strong> (3 điểm)</span>
+                                                    </li>
+                                                    <li class="flex items-center gap-2">
+                                                        <span class="text-lg">🥈</span>
+                                                        <span>Lần chọn 2: <strong>Hạng Nhì</strong> (2 điểm)</span>
+                                                    </li>
+                                                    <li class="flex items-center gap-2">
+                                                        <span class="text-lg">🥉</span>
+                                                        <span>Lần chọn 3: <strong>Hạng Ba</strong> (1 điểm)</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="font-bold text-purple-600 min-w-[1.5rem]">2.</span>
+                                            <span><strong>Thay đổi lựa chọn:</strong> Bấm vào ô kết quả đã chọn để bỏ
+                                                chọn và
+                                                chọn
+                                                lại.</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="font-bold text-purple-600 min-w-[1.5rem]">3.</span>
+                                            <div>
+                                                <strong>Gửi Phiếu:</strong>
+                                                <ul class="mt-2 ml-4 space-y-1">
+                                                    <li>• Sau khi chọn đủ 3 tiết mục, nút <strong>"Gửi Bình
+                                                            Chọn"</strong> sẽ
+                                                        sáng
+                                                        lên.</li>
+                                                    <li>• Bấm nút → Nhập Tên của bạn → Xác nhận.</li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ol>
+                                </div>
+
+                                <!-- Section 3: Quy Định -->
+                                <div
+                                    class="bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-5 border border-orange-200">
+                                    <div class="flex items-center gap-3 mb-4">
+                                        <div
+                                            class="w-10 h-10 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center shadow-md">
+                                            <i class="ri-alert-line text-xl text-white"></i>
+                                        </div>
+                                        <h3 class="text-lg font-bold text-gray-800">3. Quy Định</h3>
+                                    </div>
+                                    <ul class="space-y-2 text-gray-700">
+                                        <li class="flex items-start gap-2">
+                                            <i class="ri-error-warning-fill text-orange-500 mt-1"></i>
+                                            <span>Mỗi người (mỗi thiết bị/tên) chỉ được bình chọn <strong>1 lần duy
+                                                    nhất</strong>
+                                                trong mỗi phiên.</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <i class="ri-time-line text-orange-500 mt-1"></i>
+                                            <span>Chỉ được bình chọn khi MC thông báo "Bắt đầu" và phiên còn mở.</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <i class="ri-signal-wifi-line text-orange-500 mt-1"></i>
+                                            <span>Đảm bảo kết nối Internet ổn định để bình chọn thành công.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Footer -->
+                                <div class="text-center pt-4">
+                                    <button onclick="closeGuideModal()"
+                                        class="px-8 py-3 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-xl shadow-lg hover:opacity-90 transition-opacity">
+                                        Đã hiểu
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Toast Notification -->
-        <div id="toast" class="fixed top-4 right-4 z-[80] hidden translate-x-full transition-transform duration-300">
-            <div id="toast-container" class="bg-white shadow-2xl rounded-xl p-4 flex items-center gap-3 border-l-4">
-                <i id="toast-icon" class="text-2xl"></i>
-                <div>
-                    <h4 id="toast-title" class="font-bold text-gray-800 text-sm"></h4>
-                    <p id="toast-message" class="text-xs text-gray-600"></p>
+                <!-- Toast Notification -->
+                <div id="toast"
+                    class="fixed top-4 right-4 z-[80] hidden translate-x-full transition-transform duration-300">
+                    <div id="toast-container"
+                        class="bg-white shadow-2xl rounded-xl p-4 flex items-center gap-3 border-l-4">
+                        <i id="toast-icon" class="text-2xl"></i>
+                        <div>
+                            <h4 id="toast-title" class="font-bold text-gray-800 text-sm"></h4>
+                            <p id="toast-message" class="text-xs text-gray-600"></p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <script src="js/fingerprint.js"></script>
-        <script src="js/shared.js"></script>
-        <script src="js/vote.js"></script>
+                <script src="js/fingerprint.js"></script>
+                <script src="js/shared.js"></script>
+                <script src="js/vote.js"></script>
 </body>
 
 </html>
