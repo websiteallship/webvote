@@ -185,6 +185,20 @@ function renderVotes() {
         tdBrowser.textContent = browserName;
         tr.appendChild(tdBrowser);
 
+        // Fingerprint cell
+        const tdFingerprint = document.createElement('td');
+        tdFingerprint.className = 'px-4 py-3 text-xs text-gray-500 font-mono';
+        if (v.fingerprint) {
+            // Show first 8 chars + ellipsis for readability
+            const shortFingerprint = v.fingerprint.substring(0, 8) + '...';
+            tdFingerprint.textContent = shortFingerprint;
+            tdFingerprint.title = v.fingerprint; // Full fingerprint on hover
+        } else {
+            tdFingerprint.textContent = 'N/A';
+            tdFingerprint.className = 'px-4 py-3 text-xs text-gray-400 italic';
+        }
+        tr.appendChild(tdFingerprint);
+
         tbody.appendChild(tr);
     });
 }
