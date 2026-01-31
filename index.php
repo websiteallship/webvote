@@ -531,9 +531,10 @@
             </div>
         </div>
 
-        <script src="js/fingerprint.js?v=<?php echo filemtime('js/fingerprint.js'); ?>"></script>
-        <script src="js/shared.js?v=<?php echo filemtime('js/shared.js'); ?>"></script>
-        <script src="js/vote.js?v=<?php echo filemtime('js/vote.js'); ?>"></script>
+        <?php $gv = @file_get_contents('data/version.txt') ?: '1'; ?>
+        <script src="js/fingerprint.js?v=<?php echo filemtime('js/fingerprint.js'); ?>&gv=<?php echo $gv; ?>"></script>
+        <script src="js/shared.js?v=<?php echo filemtime('js/shared.js'); ?>&gv=<?php echo $gv; ?>"></script>
+        <script src="js/vote.js?v=<?php echo filemtime('js/vote.js'); ?>&gv=<?php echo $gv; ?>"></script>
 </body>
 
 </html>

@@ -472,6 +472,30 @@ async function closeSession() {
 }
 
 // ============================================
+// CACHE MANAGEMENT
+// ============================================
+
+async function clearGlobalCache() {
+    if (!confirm('🔄 Force tất cả user tải lại file mới?\n\nHành động này sẽ tăng global version, buộc tất cả user (kể cả đang online) phải tải lại toàn bộ JavaScript files.\n\nBạn có chắc chắn muốn tiếp tục?')) return;
+
+    try {
+        const response = await fetch('api/cache.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        const result = await response.json();
+        if (result.success) {
+            showToast('success', 'Cache Cleared!', `Version: ${result.old_version} → ${result.new_version}`);
+        } else {
+            showToast('error', 'Lỗi', 'Không thể clear cache!');
+        }
+    } catch (error) {
+        showToast('error', 'Lỗi', 'Không thể kết nối đến server!');
+    }
+}
+
+// ============================================
 // MOBILE MENU
 // ============================================
 
