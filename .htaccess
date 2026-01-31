@@ -1,6 +1,7 @@
 DirectoryIndex index.php index.html
 
-# Redirect index.html to index.php for cache busting
+# Redirect HTML to PHP for cache busting
 RewriteEngine On
 RewriteBase /
 RewriteRule ^index\.html$ index.php [L,R=301]
+RewriteRule ^admin\.html$ admin.php [L,R=301]
