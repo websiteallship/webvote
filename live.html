@@ -32,8 +32,6 @@
         body {
             background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
             color: white;
-            height: 100vh;
-            overflow: hidden;
         }
 
         .animate-up {
@@ -126,10 +124,11 @@
     </style>
 </head>
 
-<body class="flex flex-col h-screen">
+<body class="flex flex-col min-h-screen overflow-y-auto md:h-screen md:overflow-hidden">
 
     <!-- Top Bar -->
-    <div class="h-20 flex items-center justify-between px-8 bg-white/5 border-b border-white/10 backdrop-blur-md">
+    <div
+        class="flex-shrink-0 min-h-20 py-4 md:py-0 flex flex-col md:flex-row items-center justify-between px-4 md:px-8 bg-white/5 border-b border-white/10 backdrop-blur-md gap-4 md:gap-0">
         <div class="flex items-center gap-4">
             <h1 class="text-3xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
                 ALLSHIP GALA DINNER
@@ -171,7 +170,7 @@
 
     <!-- Sound Control Button -->
     <button id="sound-toggle"
-        class="fixed top-24 right-4 z-50 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full p-3 transition-all shadow-lg"
+        class="fixed top-4 right-4 md:top-24 md:right-4 z-50 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full p-3 transition-all shadow-lg"
         onclick="toggleSound()">
         <i id="sound-icon" class="ri-volume-up-line text-2xl text-white"></i>
     </button>
@@ -198,10 +197,10 @@
     </div>
 
     <!-- Main Content -->
-    <div class="flex-1 flex p-8 gap-8 overflow-hidden">
+    <div class="flex-1 flex flex-col md:flex-row p-4 md:p-8 gap-4 md:gap-8 overflow-y-visible md:overflow-hidden">
 
         <!-- Left: Leaderboard (Top 3) -->
-        <div class="w-1/3 flex flex-col gap-4">
+        <div class="w-full md:w-1/3 flex flex-col gap-4 flex-shrink-0">
             <h2 class="text-xl font-bold text-gray-300 uppercase tracking-wider mb-2">Dẫn đầu</h2>
 
             <!-- Rank 1 Card -->
@@ -245,7 +244,8 @@
         </div>
 
         <!-- Right: Racing Chart -->
-        <div class="flex-1 bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col">
+        <div
+            class="flex-1 bg-white/5 border border-white/10 rounded-2xl p-4 md:p-6 flex flex-col h-[400px] md:h-auto min-h-[400px]">
             <h2 class="text-xl font-bold text-gray-300 uppercase tracking-wider mb-4">Chi tiết bảng xếp hạng</h2>
             <div class="flex-1 relative w-full h-full">
                 <canvas id="racingChart"></canvas>
@@ -255,7 +255,8 @@
 
 
     <!-- QR Code Overlay -->
-    <div class="fixed bottom-8 right-8 bg-white p-3 rounded-xl shadow-lg max-w-[150px] transition-all hover:scale-110">
+    <div
+        class="fixed bottom-8 right-8 bg-white p-3 rounded-xl shadow-lg max-w-[150px] transition-all hover:scale-110 hidden md:block">
         <img id="qr-code" src="" alt="QR Code" class="w-24 h-24 mx-auto">
         <p class="text-xs text-center text-gray-600 mt-2">Quét để bình chọn</p>
         <p id="voting-url-display" class="text-[10px] text-center text-gray-400 mt-1 break-all"></p>
