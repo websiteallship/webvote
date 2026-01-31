@@ -75,8 +75,8 @@ async function generateFingerprint() {
         return fingerprint;
     } catch (error) {
         console.error('Error generating fingerprint:', error);
-        // Fallback to a random ID stored in localStorage
-        return getFallbackFingerprint();
+        // Fallback to User Agent-based fingerprint
+        return await getFallbackFingerprint();
     }
 }
 
@@ -154,19 +154,69 @@ async function sha256(message) {
 }
 
 /**
- * Fallback fingerprint using localStorage random ID
+ * Fallback fingerprint - ALWAYS returns a valid value
+ * Uses User Agent + screen info for browsers that block localStorage
  */
-function getFallbackFingerprint() {
-    let fallbackId = localStorage.getItem('allship_fallback_fp');
-
-    if (!fallbackId) {
-        // Generate random string
-        fallbackId = 'fb_' + Date.now().toString(36) + '_' + Math.random().toString(36).substr(2, 9);
-        try {
-            localStorage.setItem('allship_fallback_fp', fallbackId);
-        } catch (e) {
-            // If localStorage unavailable, return session-level ID
+async function getFallbackFingerprint() {
+    // Try to get from localStorage first
+    try {
+        let fallbackId = localStorage.getItem('allship_fallback_fp');
+        if (fallbackId) {
+            cachedFingerprint = fallbackId;
+            return fallbackId;
         }
+    } catch (e) {
+        // localStorage blocked, continue to generate new one
+    }
+
+    // Generate fingerprint from available info (no localStorage dependency)
+    const components = [];
+
+    // User Agent is always available
+    components.push(navigator.userAgent || 'unknown');
+
+    // Screen info
+    components.push(String(screen.width || 0));
+    components.push(String(screen.height || 0));
+    components.push(String(screen.colorDepth || 0));
+    components.push(String(window.devicePixelRatio || 1));
+
+    // Timezone
+    try {
+        components.push(Intl.DateTimeFormat().resolvedOptions().timeZone || 'unknown');
+    } catch (e) {
+        components.push('tz-unknown');
+    }
+
+    // Language
+    components.push(navigator.language || 'unknown');
+
+    // Hardware
+    components.push(String(navigator.hardwareConcurrency || 0));
+
+    // Platform
+    components.push(navigator.platform || 'unknown');
+
+    // Touch capability
+    components.push(String('ontouchstart' in window));
+    components.push(String(navigator.maxTouchPoints || 0));
+
+    const combined = 'fb_' + components.join('|');
+
+    // Try to hash it
+    let fallbackId;
+    try {
+        fallbackId = await sha256(combined);
+    } catch (e) {
+        // Even if sha256 fails, create a deterministic ID
+        fallbackId = 'raw_' + btoa(combined).substring(0, 32);
+    }
+
+    // Try to store for future use
+    try {
+        localStorage.setItem('allship_fallback_fp', fallbackId);
+    } catch (e) {
+        // Ignore if localStorage is blocked
     }
 
     cachedFingerprint = fallbackId;

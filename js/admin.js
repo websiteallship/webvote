@@ -101,6 +101,8 @@ function getBrowserName(userAgent) {
     if (!userAgent || userAgent === 'Unknown') return 'Unknown';
 
     // Detect browser from user agent string
+    // Check Zalo in-app browser FIRST (before Safari check, since Zalo uses WebKit)
+    if (userAgent.includes('Zalo')) return 'Zalo';
     if (userAgent.includes('Edg/')) return 'Edge';
     if (userAgent.includes('Chrome/') && !userAgent.includes('Edg/')) return 'Chrome';
     if (userAgent.includes('Safari/') && !userAgent.includes('Chrome/')) return 'Safari';
