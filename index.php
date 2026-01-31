@@ -161,7 +161,7 @@
         <img src="images/logo.png" alt="Allship Logo" class="h-16 mx-auto mb-4">
         <h1
             class="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary mb-2">
-            Bình Chọn Tiết Mục ALLSHIP GALA DINNER 🎆🐉
+            Bình Chọn Tiết Mục ALLSHIP GALA DINNER
         </h1>
         <p class="text-gray-500 font-medium">Bầu chọn liền tay - Nhận ngay lì xì (nếu may mắn) 🧧✨</p>
 
@@ -199,7 +199,7 @@
                 </div>
                 <h3
                     class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 mb-2">
-                    Cổng Bình Chọn Đang Đóng 🔒
+                    Cổng Bình Chọn Đang Đóng
                 </h3>
                 <p class="text-gray-500 font-medium">Vui lòng đợi hiệu lệnh "khai hỏa" từ BTC 💥</p>
             </div>
