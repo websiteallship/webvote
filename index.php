@@ -353,6 +353,12 @@
                 <p id="name-error" class="text-red-500 text-sm mt-1 hidden">Vui lòng nhập tên của bạn</p>
             </div>
 
+            <!-- Warning Message -->
+            <div class="mb-6 bg-red-50 border border-red-100 rounded-xl p-3 flex gap-3 text-sm text-red-600">
+                <i class="ri-error-warning-fill text-xl shrink-0"></i>
+                <p>Mỗi người chỉ được vote <strong>1 lần</strong>. Vi phạm sẽ bị hủy kết quả.</p>
+            </div>
+
             <button onclick="submitVote()"
                 class="w-full bg-gray-900 text-white font-bold py-3.5 rounded-xl hover:bg-black transition-colors flex items-center justify-center gap-2">
                 <span>Xác nhận gửi</span>
