@@ -236,11 +236,12 @@ const funnyWarnings = [
     "Đừng thử hack, <b>IT đang ngồi ngay bàn bên cạnh</b> đấy! 👀",
 
     // Khách mời & Lịch sự
-    "Vui lòng chỉ vote 1 lần để <b>giữ gìn sự trong sáng</b> của đêm tiệc! ✨",
-    "Một người, một phiếu, <b>triệu niềm vui</b>. Xin đừng vote đúp! ❤️",
-    "Công bằng - Văn minh - Lịch sự. Mỗi thiết bị <b>chỉ một lần chọn</b> nhé! 🎩",
-    "Vote đúng, vote đủ, <b>vận may sẽ tới</b> trong phần bốc thăm! 🎁",
-    "Hệ thống AI 'chạy bằng cơm' đang giám sát. Xin hãy <b>vote trung thực</b>! 📸"
+    // Khách mời & Hài hước (Updated)
+    "Vote 2 lần là bị MC mời lên <b>hát đơn ca tặng cả khán phòng</b> đấy! 🎤",
+    "Ai vote đúp xin mời <b>tài trợ bia</b> cho cả bàn tiệc nha! 🍺",
+    "Vote nhiệt tình nhưng <b>đừng nhiệt tình quá</b> (1 lần thôi nha)! 🤣",
+    "Hệ thống đang đếm phiếu, đừng làm nó <b>rối loạn tiền đình</b>! 😵",
+    "Vote 1 lần thì <b>đẹp trai/xinh gái</b>, vote 2 lần thì... kỳ lắm á! �"
 ];
 
 function openSubmitModal() {
