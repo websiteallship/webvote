@@ -258,8 +258,22 @@ async function submitVote() {
         return;
     }
 
-    // Generate device fingerprint
-    const fingerprint = await generateFingerprint();
+    // Generate device fingerprint with strict validation
+    let fingerprint;
+    try {
+        fingerprint = await generateFingerprint();
+        console.log('Fingerprint generated:', fingerprint ? fingerprint.substring(0, 16) + '...' : 'EMPTY');
+    } catch (err) {
+        console.error('Fingerprint generation failed:', err);
+        fingerprint = null;
+    }
+
+    // STRICT VALIDATION: Block submission if fingerprint is empty
+    if (!fingerprint || fingerprint.length < 10) {
+        console.error('Fingerprint is empty or invalid, blocking vote submission');
+        showToast('Lỗi định danh thiết bị! Vui lòng tải lại trang và thử lại.');
+        return;
+    }
 
     const payload = {
         voter: name,
