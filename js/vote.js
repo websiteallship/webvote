@@ -227,8 +227,32 @@ function checkSubmitButton() {
     }
 }
 
+const funnyWarnings = [
+    // Nội bộ & Hài hước
+    "Vote 1 lần thôi nhé, vote 2 lần là <b>trừ thưởng Tết</b> đấy! 💸",
+    "Gian lận là bị bắt lên <b>sân khấu múa phụ họa</b> ngay lập tức! 💃",
+    "Hệ thống bắt trùng còn <b>nhạy hơn sếp soi KPI</b>. Đừng đùa! 🤖",
+    "Mỗi người một phiếu, gian lận <b>mất lộc đầu năm</b> ráng chịu nha! 🧧",
+    "Đừng thử hack, <b>IT đang ngồi ngay bàn bên cạnh</b> đấy! 👀",
+
+    // Khách mời & Lịch sự
+    "Vui lòng chỉ vote 1 lần để <b>giữ gìn sự trong sáng</b> của đêm tiệc! ✨",
+    "Một người, một phiếu, <b>triệu niềm vui</b>. Xin đừng vote đúp! ❤️",
+    "Công bằng - Văn minh - Lịch sự. Mỗi thiết bị <b>chỉ một lần chọn</b> nhé! 🎩",
+    "Vote đúng, vote đủ, <b>vận may sẽ tới</b> trong phần bốc thăm! 🎁",
+    "Hệ thống AI 'chạy bằng cơm' đang giám sát. Xin hãy <b>vote trung thực</b>! 📸"
+];
+
 function openSubmitModal() {
     if (!votes[1] || !votes[2] || !votes[3]) return;
+
+    // Randomize warning message
+    const msgElement = document.getElementById('warning-msg');
+    if (msgElement) {
+        const randomIndex = Math.floor(Math.random() * funnyWarnings.length);
+        msgElement.innerHTML = funnyWarnings[randomIndex];
+    }
+
     document.getElementById('submit-modal').classList.remove('hidden');
     setTimeout(() => {
         document.getElementById('modal-content').classList.remove('translate-y-full');

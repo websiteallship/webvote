@@ -356,7 +356,7 @@
             <!-- Warning Message -->
             <div class="mb-6 bg-red-50 border border-red-100 rounded-xl p-3 flex gap-3 text-sm text-red-600">
                 <i class="ri-error-warning-fill text-xl shrink-0"></i>
-                <p>Mỗi người chỉ được vote <strong>1 lần</strong>. Vi phạm sẽ bị hủy kết quả.</p>
+                <p id="warning-msg">Mỗi người chỉ được vote <strong>1 lần</strong>. Vi phạm sẽ bị hủy kết quả.</p>
             </div>
 
             <button onclick="submitVote()"
